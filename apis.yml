@@ -1,0 +1,194 @@
+aid: pieces
+url: https://raw.githubusercontent.com/api-evangelist/pieces/refs/heads/main/apis.yml
+name: Pieces
+kind: company
+description: Pieces is an on-device AI developer assistant and long-term memory tool.
+  Pieces OS runs locally on the developer's machine and exposes a documented local
+  REST API at http://localhost:1000 covering saved snippets (assets), the Pieces
+  Copilot (QGPT) question/stream endpoints, local and cloud models, formats,
+  applications, conversations, and workspace context. The same on-device API powers
+  official OpenAPI-generated SDKs for Python, TypeScript, Dart, Kotlin, and C#.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- AI
+- Developer Tools
+- On-Device
+- Local API
+- Long-Term Memory
+created: '2026-06-20'
+modified: '2026-06-20'
+specificationVersion: '0.19'
+apis:
+- aid: pieces:pieces-assets-api
+  name: Pieces Assets API
+  tags:
+  - Assets
+  - Snippets
+  - On-Device
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.pieces.app/products/core-dependencies/pieces-os
+  baseURL: http://localhost:1000
+  properties:
+  - url: https://docs.pieces.app/products/core-dependencies/pieces-os
+    type: Documentation
+  - url: https://github.com/pieces-app/pieces-os-client-openapi-spec
+    type: APIReference
+  - url: openapi/pieces-openapi.yml
+    type: OpenAPI
+  - url: collections/pieces.postman_collection.json
+    type: PostmanCollection
+  - url: collections/pieces.opencollection.json
+    type: OpenCollection
+  - url: https://github.com/pieces-app
+    type: GitHub
+  description: Create, read, update, delete, search, and stream saved snippets (assets)
+    held in the local Pieces OS database. Served on-device over the localhost REST
+    transport - no data leaves the machine unless the user opts into cloud sync.
+- aid: pieces:pieces-copilot-qgpt-api
+  name: Pieces Copilot (QGPT) API
+  tags:
+  - Copilot
+  - QGPT
+  - Conversations
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.pieces.app/products/core-dependencies/pieces-os
+  baseURL: http://localhost:1000
+  properties:
+  - url: https://docs.pieces.app/products/core-dependencies/pieces-os
+    type: Documentation
+  - url: https://github.com/pieces-app/pieces-os-client-openapi-spec
+    type: APIReference
+  - url: openapi/pieces-openapi.yml
+    type: OpenAPI
+  - url: asyncapi/pieces-asyncapi.yml
+    type: AsyncAPI
+  - url: collections/pieces.postman_collection.json
+    type: PostmanCollection
+  - url: collections/pieces.opencollection.json
+    type: OpenCollection
+  - url: https://github.com/pieces-app
+    type: GitHub
+  description: The Pieces Copilot generative engine (QGPT). Ask questions grounded in
+    relevant local snippets via POST /qgpt/question, score relevance, reprompt, and
+    open a WebSocket at /qgpt/stream for streamed, multi-turn conversational answers.
+    Runs against local or cloud LLMs from the on-device Pieces OS process.
+- aid: pieces:pieces-conversations-api
+  name: Pieces Conversations API
+  tags:
+  - Conversations
+  - Messages
+  - Copilot
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.pieces.app/products/core-dependencies/pieces-os
+  baseURL: http://localhost:1000
+  properties:
+  - url: https://docs.pieces.app/products/core-dependencies/pieces-os
+    type: Documentation
+  - url: https://github.com/pieces-app/pieces-os-client-openapi-spec
+    type: APIReference
+  - url: openapi/pieces-openapi.yml
+    type: OpenAPI
+  - url: collections/pieces.postman_collection.json
+    type: PostmanCollection
+  - url: collections/pieces.opencollection.json
+    type: OpenCollection
+  - url: https://github.com/pieces-app
+    type: GitHub
+  description: Manage Copilot conversations and their messages locally - create, list,
+    rename, search, summarize, and delete conversations, and create/update/search
+    the messages within them. Stored in the on-device Pieces OS database.
+- aid: pieces:pieces-models-api
+  name: Pieces Models API
+  tags:
+  - Models
+  - LLM
+  - On-Device
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.pieces.app/products/core-dependencies/pieces-os
+  baseURL: http://localhost:1000
+  properties:
+  - url: https://docs.pieces.app/products/core-dependencies/pieces-os
+    type: Documentation
+  - url: https://github.com/pieces-app/pieces-os-client-openapi-spec
+    type: APIReference
+  - url: openapi/pieces-openapi.yml
+    type: OpenAPI
+  - url: collections/pieces.postman_collection.json
+    type: PostmanCollection
+  - url: collections/pieces.opencollection.json
+    type: OpenCollection
+  - url: https://github.com/pieces-app
+    type: GitHub
+  description: Enumerate and manage the LLMs available to Pieces OS - list models,
+    download/load/unload local models (e.g. Llama, Mistral via on-device runtime),
+    track download progress, and delete model caches. Local models run fully
+    on-device; cloud models are routed through the same local API surface.
+- aid: pieces:pieces-formats-api
+  name: Pieces Formats API
+  tags:
+  - Formats
+  - Classification
+  - Fragments
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.pieces.app/products/core-dependencies/pieces-os
+  baseURL: http://localhost:1000
+  properties:
+  - url: https://docs.pieces.app/products/core-dependencies/pieces-os
+    type: Documentation
+  - url: https://github.com/pieces-app/pieces-os-client-openapi-spec
+    type: APIReference
+  - url: openapi/pieces-openapi.yml
+    type: OpenAPI
+  - url: collections/pieces.postman_collection.json
+    type: PostmanCollection
+  - url: collections/pieces.opencollection.json
+    type: OpenCollection
+  - url: https://github.com/pieces-app
+    type: GitHub
+  description: Read, update, reclassify, and analyze the underlying formats (code or
+    text fragment representations) that back each asset. Served on-device by Pieces
+    OS over the localhost transport.
+- aid: pieces:pieces-applications-workspace-api
+  name: Pieces Applications & Workspace API
+  tags:
+  - Applications
+  - Workspace
+  - OS
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.pieces.app/products/core-dependencies/pieces-os
+  baseURL: http://localhost:1000
+  properties:
+  - url: https://docs.pieces.app/products/core-dependencies/pieces-os
+    type: Documentation
+  - url: https://github.com/pieces-app/pieces-os-client-openapi-spec
+    type: APIReference
+  - url: openapi/pieces-openapi.yml
+    type: OpenAPI
+  - url: collections/pieces.postman_collection.json
+    type: PostmanCollection
+  - url: collections/pieces.opencollection.json
+    type: OpenCollection
+  - url: https://github.com/pieces-app
+    type: GitHub
+  description: Register applications, open/close application sessions, read the
+    well-known health and version of the local Pieces OS instance, and manage user
+    and OS-level context (device information, settings, sign-in). The control plane
+    for the on-device Pieces OS process.
+common:
+- type: GitHubOrganization
+  url: https://github.com/pieces-app
+- type: LinkedIn
+  url: https://www.linkedin.com/company/getpieces
+- type: Website
+  url: https://pieces.app
+- type: Documentation
+  url: https://docs.pieces.app
+- type: Plans
+  url: plans/pieces-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/pieces-rate-limits.yml
+- type: FinOps
+  url: finops/pieces-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

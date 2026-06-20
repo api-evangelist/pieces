@@ -1,0 +1,189 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pieces OS Local API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": { "name": "Well Known", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Health check", "type": "http" },
+          "http": { "method": "GET", "url": "http://localhost:1000/.well-known/health" },
+          "docs": "Health check for the local Pieces OS instance."
+        },
+        {
+          "info": { "name": "Version", "type": "http" },
+          "http": { "method": "GET", "url": "http://localhost:1000/.well-known/version" },
+          "docs": "Returns the running Pieces OS version."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Assets", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List assets (snapshot)", "type": "http" },
+          "http": { "method": "GET", "url": "http://localhost:1000/assets" },
+          "docs": "Get a snapshot of all saved assets."
+        },
+        {
+          "info": { "name": "Create asset", "type": "http" },
+          "http": { "method": "POST", "url": "http://localhost:1000/assets/create", "body": { "type": "json", "data": "{\"type\":\"SEED_TYPE_ASSET\",\"asset\":{}}" } },
+          "docs": "Create (save) a new asset from a seed."
+        },
+        {
+          "info": { "name": "Search assets", "type": "http" },
+          "http": { "method": "POST", "url": "http://localhost:1000/assets/search", "body": { "type": "json", "data": "{\"query\":\"example\"}" } },
+          "docs": "Search saved assets by query."
+        },
+        {
+          "info": { "name": "Get asset", "type": "http" },
+          "http": { "method": "GET", "url": "http://localhost:1000/asset/{asset}" },
+          "docs": "Get a single asset by identifier."
+        },
+        {
+          "info": { "name": "Update asset", "type": "http" },
+          "http": { "method": "POST", "url": "http://localhost:1000/asset/update", "body": { "type": "json", "data": "{}" } },
+          "docs": "Update an existing asset."
+        },
+        {
+          "info": { "name": "Delete asset", "type": "http" },
+          "http": { "method": "POST", "url": "http://localhost:1000/assets/{asset}/delete" },
+          "docs": "Delete an asset by identifier."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Formats", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List formats (snapshot)", "type": "http" },
+          "http": { "method": "GET", "url": "http://localhost:1000/formats" },
+          "docs": "Get a snapshot of all formats."
+        },
+        {
+          "info": { "name": "Get format", "type": "http" },
+          "http": { "method": "GET", "url": "http://localhost:1000/format/{format}" },
+          "docs": "Get a single format by identifier."
+        }
+      ]
+    },
+    {
+      "info": { "name": "QGPT", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Ask question", "type": "http" },
+          "http": { "method": "POST", "url": "http://localhost:1000/qgpt/question", "body": { "type": "json", "data": "{\"query\":\"How do I read a file in Python?\",\"relevant\":{\"iterable\":[]}}" } },
+          "docs": "Ask the Copilot a question grounded in relevant snippets."
+        },
+        {
+          "info": { "name": "Relevance", "type": "http" },
+          "http": { "method": "POST", "url": "http://localhost:1000/qgpt/relevance", "body": { "type": "json", "data": "{\"query\":\"file io\",\"seeds\":{}}" } },
+          "docs": "Compute the snippets most relevant to a query."
+        },
+        {
+          "info": { "name": "Reprompt", "type": "http" },
+          "http": { "method": "POST", "url": "http://localhost:1000/qgpt/reprompt", "body": { "type": "json", "data": "{}" } },
+          "docs": "Reprompt the Copilot within an ongoing exchange."
+        },
+        {
+          "info": { "name": "Stream (WebSocket)", "type": "http" },
+          "http": { "method": "GET", "url": "http://localhost:1000/qgpt/stream" },
+          "docs": "Documented WebSocket endpoint for streamed Copilot answers. Connect with a WebSocket client to ws://localhost:1000/qgpt/stream."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Conversations", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List conversations (snapshot)", "type": "http" },
+          "http": { "method": "GET", "url": "http://localhost:1000/conversations" },
+          "docs": "Get a snapshot of all Copilot conversations."
+        },
+        {
+          "info": { "name": "Create conversation", "type": "http" },
+          "http": { "method": "POST", "url": "http://localhost:1000/conversations/create", "body": { "type": "json", "data": "{}" } },
+          "docs": "Create a new Copilot conversation."
+        },
+        {
+          "info": { "name": "Get conversation", "type": "http" },
+          "http": { "method": "GET", "url": "http://localhost:1000/conversation/{conversation}" },
+          "docs": "Get a single conversation by identifier."
+        },
+        {
+          "info": { "name": "Get conversation messages", "type": "http" },
+          "http": { "method": "GET", "url": "http://localhost:1000/conversation/{conversation}/messages" },
+          "docs": "List the messages in a conversation."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Models", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List models (snapshot)", "type": "http" },
+          "http": { "method": "GET", "url": "http://localhost:1000/models" },
+          "docs": "List the models available to Pieces OS."
+        },
+        {
+          "info": { "name": "Get model", "type": "http" },
+          "http": { "method": "GET", "url": "http://localhost:1000/model/{model}" },
+          "docs": "Get a single model by identifier."
+        },
+        {
+          "info": { "name": "Download model", "type": "http" },
+          "http": { "method": "POST", "url": "http://localhost:1000/model/{model}/download" },
+          "docs": "Download a local model to the device."
+        },
+        {
+          "info": { "name": "Load model", "type": "http" },
+          "http": { "method": "POST", "url": "http://localhost:1000/model/{model}/load" },
+          "docs": "Load a downloaded local model into memory."
+        },
+        {
+          "info": { "name": "Unload model", "type": "http" },
+          "http": { "method": "POST", "url": "http://localhost:1000/model/{model}/unload" },
+          "docs": "Unload a local model from memory."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Applications", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List applications (snapshot)", "type": "http" },
+          "http": { "method": "GET", "url": "http://localhost:1000/applications" },
+          "docs": "List registered applications."
+        },
+        {
+          "info": { "name": "Register application", "type": "http" },
+          "http": { "method": "POST", "url": "http://localhost:1000/applications/register", "body": { "type": "json", "data": "{\"name\":\"OPEN_SOURCE\",\"platform\":\"MACOS\"}" } },
+          "docs": "Register an application with Pieces OS."
+        },
+        {
+          "info": { "name": "Open session", "type": "http" },
+          "http": { "method": "POST", "url": "http://localhost:1000/applications/session/open" },
+          "docs": "Open an application session."
+        },
+        {
+          "info": { "name": "Close session", "type": "http" },
+          "http": { "method": "POST", "url": "http://localhost:1000/applications/session/close" },
+          "docs": "Close an application session."
+        }
+      ]
+    },
+    {
+      "info": { "name": "User", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get user", "type": "http" },
+          "http": { "method": "GET", "url": "http://localhost:1000/user" },
+          "docs": "Get the current local user profile."
+        }
+      ]
+    }
+  ]
+}

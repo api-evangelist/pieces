@@ -1,0 +1,105 @@
+asyncapi: '2.6.0'
+id: 'urn:app:pieces:os:qgpt:stream'
+info:
+  title: Pieces Copilot (QGPT) Streaming (On-Device WebSocket)
+  version: '1.0.0'
+  description: |
+    AsyncAPI 2.6 description of the Pieces Copilot **QGPT streaming** surface.
+
+    Pieces runs **on-device**. Pieces OS is a local process that serves its API
+    over the loopback interface at `http://localhost:1000` (alternate port
+    `http://localhost:5323`). Unlike many AI providers, Pieces documents a real
+    **WebSocket** endpoint for streamed Copilot answers: `GET /qgpt/stream`,
+    published in the official OpenAPI spec with the summary "/qgpt/stream [WS]"
+    and described as a "WebSocket connection that streams inputs to the qGPT
+    model."
+
+    This WebSocket is bound to localhost and is **not** exposed to the network -
+    it is an on-device transport. The client opens `ws://localhost:1000/qgpt/stream`,
+    sends QGPTStreamInput messages (a question and/or relevance payload), and
+    receives incremental QGPTStreamOutput messages until the answer completes.
+    The same engine supports multiple concurrent conversations.
+
+    The non-streamed request/response surface (POST /qgpt/question, /qgpt/relevance,
+    /qgpt/reprompt and the asset, model, conversation, and application resources)
+    is modeled in the companion OpenAPI document at `openapi/pieces-openapi.yml`.
+  contact:
+    name: API Evangelist
+    email: kin@apievangelist.com
+    url: https://apievangelist.com
+  license:
+    name: API documentation - Pieces Terms of Service
+    url: https://pieces.app/legal/terms
+  x-transport-notes:
+    transport: WebSocket
+    protocol: ws
+    direction: bidirectional
+    onDevice: true
+    baseURL: ws://localhost:1000/qgpt/stream
+    triggeredBy: 'WebSocket upgrade on GET ws://localhost:1000/qgpt/stream'
+    notSSE: true
+    source: https://github.com/pieces-app/pieces-os-client-openapi-spec
+defaultContentType: application/json
+servers:
+  pieces-os:
+    url: localhost:1000
+    protocol: ws
+    description: |
+      The on-device Pieces OS WebSocket transport. Bound to the loopback
+      interface only; not network-exposed. The QGPT stream is opened by issuing
+      a WebSocket upgrade to /qgpt/stream against the local Pieces OS process.
+channels:
+  /qgpt/stream:
+    description: |
+      The Pieces Copilot (QGPT) streaming channel. The client opens this
+      on-device WebSocket and sends question and/or relevance input; the server
+      streams incremental answer chunks back until the exchange completes.
+    subscribe:
+      operationId: receiveQGPTStreamOutput
+      summary: Receive streamed Copilot answer chunks from the on-device QGPT engine.
+      message:
+        $ref: '#/components/messages/QGPTStreamOutput'
+    publish:
+      operationId: sendQGPTStreamInput
+      summary: Send a question and/or relevance payload to the on-device QGPT engine.
+      message:
+        $ref: '#/components/messages/QGPTStreamInput'
+components:
+  messages:
+    QGPTStreamInput:
+      name: QGPTStreamInput
+      title: QGPT Stream Input
+      contentType: application/json
+      summary: Client-to-server message carrying a question and/or relevance payload.
+      payload:
+        type: object
+        properties:
+          question:
+            type: object
+            description: The question query and grounding seeds.
+          relevance:
+            type: object
+            description: Relevance computation input; may set option question:true to combine.
+          conversation:
+            type: string
+            description: Identifier of the conversation this turn belongs to.
+          model:
+            type: string
+            description: Identifier of the model (local or cloud) to answer with.
+    QGPTStreamOutput:
+      name: QGPTStreamOutput
+      title: QGPT Stream Output
+      contentType: application/json
+      summary: Server-to-client streamed answer chunk.
+      payload:
+        type: object
+        properties:
+          question:
+            type: object
+            description: Incremental answer payload (answers and scores).
+          status:
+            type: string
+            description: Stream status, e.g. IN-PROGRESS or COMPLETED.
+          conversation:
+            type: string
+            description: Identifier of the conversation this chunk belongs to.

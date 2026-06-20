@@ -1,0 +1,293 @@
+{
+  "info": {
+    "_postman_id": "b7c1f0e2-3a4d-4c5b-9e6a-2f8d1c0a4b11",
+    "name": "Pieces OS Local API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "On-device Pieces OS local REST API. Served over the loopback interface at http://localhost:1000. Covers assets (snippets), formats, Copilot/QGPT, conversations, models, applications, user, and well-known health/version.\n\nDocs: https://docs.pieces.app/products/core-dependencies/pieces-os",
+      "type": "text/plain"
+    }
+  },
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:1000",
+      "key": "baseUrl"
+    }
+  ],
+  "item": [
+    {
+      "name": "Well Known",
+      "item": [
+        {
+          "name": "Health check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/.well-known/health", "host": ["{{baseUrl}}"], "path": [".well-known", "health"] }
+          }
+        },
+        {
+          "name": "Version",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/.well-known/version", "host": ["{{baseUrl}}"], "path": [".well-known", "version"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Assets",
+      "item": [
+        {
+          "name": "List assets (snapshot)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/assets", "host": ["{{baseUrl}}"], "path": ["assets"] }
+          }
+        },
+        {
+          "name": "Create asset",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"type\": \"SEED_TYPE_ASSET\",\n  \"asset\": {}\n}" },
+            "url": { "raw": "{{baseUrl}}/assets/create", "host": ["{{baseUrl}}"], "path": ["assets", "create"] }
+          }
+        },
+        {
+          "name": "Search assets",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"query\": \"example\"\n}" },
+            "url": { "raw": "{{baseUrl}}/assets/search", "host": ["{{baseUrl}}"], "path": ["assets", "search"] }
+          }
+        },
+        {
+          "name": "Get asset",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/asset/:asset", "host": ["{{baseUrl}}"], "path": ["asset", ":asset"], "variable": [{ "key": "asset", "value": "" }] }
+          }
+        },
+        {
+          "name": "Update asset",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{}" },
+            "url": { "raw": "{{baseUrl}}/asset/update", "host": ["{{baseUrl}}"], "path": ["asset", "update"] }
+          }
+        },
+        {
+          "name": "Delete asset",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/assets/:asset/delete", "host": ["{{baseUrl}}"], "path": ["assets", ":asset", "delete"], "variable": [{ "key": "asset", "value": "" }] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Formats",
+      "item": [
+        {
+          "name": "List formats (snapshot)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/formats", "host": ["{{baseUrl}}"], "path": ["formats"] }
+          }
+        },
+        {
+          "name": "Get format",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/format/:format", "host": ["{{baseUrl}}"], "path": ["format", ":format"], "variable": [{ "key": "format", "value": "" }] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "QGPT",
+      "item": [
+        {
+          "name": "Ask question",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"query\": \"How do I read a file in Python?\",\n  \"relevant\": { \"iterable\": [] }\n}" },
+            "url": { "raw": "{{baseUrl}}/qgpt/question", "host": ["{{baseUrl}}"], "path": ["qgpt", "question"] }
+          }
+        },
+        {
+          "name": "Relevance",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"query\": \"file io\",\n  \"seeds\": {}\n}" },
+            "url": { "raw": "{{baseUrl}}/qgpt/relevance", "host": ["{{baseUrl}}"], "path": ["qgpt", "relevance"] }
+          }
+        },
+        {
+          "name": "Reprompt",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{}" },
+            "url": { "raw": "{{baseUrl}}/qgpt/reprompt", "host": ["{{baseUrl}}"], "path": ["qgpt", "reprompt"] }
+          }
+        },
+        {
+          "name": "Stream (WebSocket: ws://localhost:1000/qgpt/stream)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "description": { "content": "Documented WebSocket endpoint. Connect with a WebSocket client to ws://localhost:1000/qgpt/stream; this HTTP entry is a placeholder for the upgrade.", "type": "text/plain" },
+            "url": { "raw": "{{baseUrl}}/qgpt/stream", "host": ["{{baseUrl}}"], "path": ["qgpt", "stream"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Conversations",
+      "item": [
+        {
+          "name": "List conversations (snapshot)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/conversations", "host": ["{{baseUrl}}"], "path": ["conversations"] }
+          }
+        },
+        {
+          "name": "Create conversation",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{}" },
+            "url": { "raw": "{{baseUrl}}/conversations/create", "host": ["{{baseUrl}}"], "path": ["conversations", "create"] }
+          }
+        },
+        {
+          "name": "Get conversation",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/conversation/:conversation", "host": ["{{baseUrl}}"], "path": ["conversation", ":conversation"], "variable": [{ "key": "conversation", "value": "" }] }
+          }
+        },
+        {
+          "name": "Get conversation messages",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/conversation/:conversation/messages", "host": ["{{baseUrl}}"], "path": ["conversation", ":conversation", "messages"], "variable": [{ "key": "conversation", "value": "" }] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Models",
+      "item": [
+        {
+          "name": "List models (snapshot)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/models", "host": ["{{baseUrl}}"], "path": ["models"] }
+          }
+        },
+        {
+          "name": "Get model",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/model/:model", "host": ["{{baseUrl}}"], "path": ["model", ":model"], "variable": [{ "key": "model", "value": "" }] }
+          }
+        },
+        {
+          "name": "Download model",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/model/:model/download", "host": ["{{baseUrl}}"], "path": ["model", ":model", "download"], "variable": [{ "key": "model", "value": "" }] }
+          }
+        },
+        {
+          "name": "Load model",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/model/:model/load", "host": ["{{baseUrl}}"], "path": ["model", ":model", "load"], "variable": [{ "key": "model", "value": "" }] }
+          }
+        },
+        {
+          "name": "Unload model",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/model/:model/unload", "host": ["{{baseUrl}}"], "path": ["model", ":model", "unload"], "variable": [{ "key": "model", "value": "" }] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Applications",
+      "item": [
+        {
+          "name": "List applications (snapshot)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/applications", "host": ["{{baseUrl}}"], "path": ["applications"] }
+          }
+        },
+        {
+          "name": "Register application",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"OPEN_SOURCE\",\n  \"platform\": \"MACOS\"\n}" },
+            "url": { "raw": "{{baseUrl}}/applications/register", "host": ["{{baseUrl}}"], "path": ["applications", "register"] }
+          }
+        },
+        {
+          "name": "Open session",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/applications/session/open", "host": ["{{baseUrl}}"], "path": ["applications", "session", "open"] }
+          }
+        },
+        {
+          "name": "Close session",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/applications/session/close", "host": ["{{baseUrl}}"], "path": ["applications", "session", "close"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Get user",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/user", "host": ["{{baseUrl}}"], "path": ["user"] }
+          }
+        }
+      ]
+    }
+  ]
+}

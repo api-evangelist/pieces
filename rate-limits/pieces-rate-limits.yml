@@ -1,0 +1,65 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Pieces
+providerId: pieces
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- AI
+- Developer Tools
+- On-Device
+- Local API
+- Long-Term Memory
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  The Pieces OS API is served on-device over the loopback interface
+  (http://localhost:1000) and does not impose conventional per-account
+  HTTP rate limits the way a hosted cloud API would. Throughput for local
+  model inference is bounded by the host machine's CPU, GPU, and memory.
+  Where Copilot requests are routed to cloud models, usage limits follow the
+  account's plan tier (Free has limited cloud usage; Pro is unlimited), and
+  the upstream cloud model provider's own limits apply. Specific numeric
+  limits are not documented for the local API and are not reconciled here.
+notes: >-
+  Because the transport is on-device, the practical limit is local hardware,
+  not a published RPM/TPM quota. Cloud-routed Copilot usage is gated by plan
+  tier rather than a documented rate-limit table. Verify any cloud-side limits
+  against the Pieces paid-plans page on reconciliation.
+sources:
+- https://docs.pieces.app/products/core-dependencies/pieces-os
+- https://docs.pieces.app/products/paid-plans
+responseCodes:
+  throttled: 429
+limits:
+- name: Local API Requests
+  scope: device
+  metric: requests
+  limit: bounded by local hardware
+  notes: No documented HTTP rate limit; throughput depends on the host machine.
+- name: Local Model Inference
+  scope: device
+  metric: tokens
+  limit: bounded by local CPU/GPU/memory
+  notes: On-device LLM throughput is hardware-bound, not quota-bound.
+- name: Cloud Model Usage (Free)
+  scope: account
+  metric: requests
+  limit: limited (see plan)
+  notes: Free tier includes limited usage of select cloud models.
+- name: Cloud Model Usage (Pro)
+  scope: account
+  metric: requests
+  limit: unlimited (per plan)
+  notes: Pro tier provides unlimited premium cloud model usage; upstream provider limits may still apply.
+policies:
+- name: On-Device Transport
+  description: The API binds to localhost; it is not exposed to the network, so limits are local rather than tenant-based.
+- name: Plan-Gated Cloud Usage
+  description: Cloud-routed Copilot usage is governed by the account plan (Free limited, Pro unlimited) rather than a documented rate-limit table.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

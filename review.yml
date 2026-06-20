@@ -1,0 +1,88 @@
+aid: pieces
+name: Pieces
+review:
+  question: Does Pieces expose a documented public WebSocket API?
+  answer: true
+  date: '2026-06-20'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: true
+  asyncapiScopeNote: |
+    The Pieces OS local API documents a real WebSocket endpoint for the Pieces
+    Copilot generative engine: GET /qgpt/stream is published in the official
+    OpenAPI spec with the summary "/qgpt/stream [WS]" and a description that
+    explicitly states it "Provides a WebSocket connection that streams inputs to
+    the qGPT model." An AsyncAPI 2.6 document was created at
+    asyncapi/pieces-asyncapi.yml describing this WebSocket stream. The transport
+    is on-device (ws://localhost:1000), not a hosted cloud endpoint.
+findings:
+  summary: |
+    Pieces runs on-device. Pieces OS is a local process that serves a documented
+    REST API over the loopback interface at http://localhost:1000 (alternate
+    port http://localhost:5323). The surface is large and machine-generated;
+    core resources include assets (saved snippets), formats, qgpt (Copilot),
+    conversations, messages, models, applications, user, and well-known health
+    and version endpoints. In addition to REST, Pieces documents a real
+    WebSocket endpoint - /qgpt/stream - for streamed Copilot answers, and
+    several backup endpoints also offer WebSocket variants (e.g.
+    /backups/create/streamed/websocket). Because the API binds to localhost, it
+    is not network-exposed; cloud features are optional and opt-in.
+  transports:
+    - protocol: REST
+      scheme: http
+      baseURL: http://localhost:1000
+      documented: true
+      note: On-device loopback transport. Not exposed to the network.
+    - protocol: WebSocket
+      scheme: ws
+      baseURL: ws://localhost:1000/qgpt/stream
+      documented: true
+      note: Documented WebSocket stream for the Copilot/QGPT engine; spec summary reads "/qgpt/stream [WS]".
+  endpointsConfirmedRest:
+    - GET  http://localhost:1000/.well-known/health
+    - GET  http://localhost:1000/.well-known/version
+    - GET  http://localhost:1000/assets
+    - POST http://localhost:1000/assets/create
+    - POST http://localhost:1000/assets/search
+    - GET  http://localhost:1000/asset/{asset}
+    - POST http://localhost:1000/asset/update
+    - POST http://localhost:1000/assets/{asset}/delete
+    - GET  http://localhost:1000/formats
+    - GET  http://localhost:1000/format/{format}
+    - POST http://localhost:1000/qgpt/question
+    - POST http://localhost:1000/qgpt/relevance
+    - POST http://localhost:1000/qgpt/reprompt
+    - GET  http://localhost:1000/conversations
+    - POST http://localhost:1000/conversations/create
+    - GET  http://localhost:1000/conversation/{conversation}
+    - GET  http://localhost:1000/conversation/{conversation}/messages
+    - GET  http://localhost:1000/models
+    - GET  http://localhost:1000/model/{model}
+    - POST http://localhost:1000/model/{model}/download
+    - POST http://localhost:1000/model/{model}/load
+    - POST http://localhost:1000/model/{model}/unload
+    - GET  http://localhost:1000/applications
+    - POST http://localhost:1000/applications/register
+    - GET  http://localhost:1000/user
+  endpointsConfirmedWebSocket:
+    - WS  ws://localhost:1000/qgpt/stream
+    - WS  ws://localhost:1000/backups/create/streamed/websocket
+    - WS  ws://localhost:1000/backup/{backup}/restore/streamed/websocket
+sources:
+  - url: https://docs.pieces.app/products/core-dependencies/pieces-os
+    type: Documentation
+    note: Describes Pieces OS as the local on-device dependency that serves the API.
+  - url: https://github.com/pieces-app/pieces-os-client-openapi-spec
+    type: APIReference
+    note: Official OpenAPI spec; servers list http://localhost:1000 and http://localhost:5323. /qgpt/stream summary reads "/qgpt/stream [WS]".
+  - url: https://github.com/pieces-app
+    type: GitHub
+    note: Official OpenAPI-generated SDKs for Python, TypeScript, Dart, Kotlin, and C#.
+actions:
+  asyncapiPath: asyncapi/pieces-asyncapi.yml
+  apisYmlUpdated: true
+  reason: |
+    A documented WebSocket surface exists (/qgpt/stream for the Copilot engine).
+    An AsyncAPI 2.6 document was authored for that on-device WebSocket stream,
+    with the ws://localhost transport documented explicitly throughout (server
+    protocol, channel, and info notes) so the on-device, loopback-only nature is
+    never misrepresented.

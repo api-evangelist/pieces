@@ -1,0 +1,130 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Pieces
+providerId: pieces
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: true
+tags:
+- AI
+- Developer Tools
+- On-Device
+- Local API
+- Long-Term Memory
+- Plans
+description: >-
+  The core Pieces for Developers product - Pieces OS, the desktop app, IDE and
+  browser plugins, snippet management, and the local REST API - is free. The free
+  tier includes unlimited use of local on-device LLMs (via the bundled
+  Ollama-backed runtime) and limited usage of select cloud models. The paid Pro
+  tier unlocks unlimited use of premium cloud LLMs (e.g. GPT, Claude, Gemini
+  families) for Copilot. Pieces for Teams adds cloud sync and collaboration with
+  pricing provided on request. Because the API is served on-device from localhost,
+  there is no per-call API pricing; cost is tied to the optional cloud model
+  subscription, not API requests.
+notes: >-
+  Pro pricing was published at $18.99/month (or ~$14.17/month billed annually,
+  $169.99/year) at the time of authoring; verify current pricing on the Pieces
+  paid-plans page. Teams pricing is quote-based.
+sources:
+- https://pieces.app/pricing
+- https://docs.pieces.app/products/paid-plans
+plans:
+- id: pieces-free
+  name: Free
+  type: free
+  description: >-
+    Free core product - Pieces OS, desktop app, IDE/browser plugins, unlimited
+    snippets, long-term memory, the local REST API, unlimited local on-device
+    models, and limited cloud model usage.
+  entries:
+  - label: Local Models
+    name: local_models
+    type: free
+    metric: requests
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: free (runs fully on-device)
+    userMultiplied: false
+  - label: Saved Snippets (Assets)
+    name: assets
+    type: free
+    metric: items
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: free
+    userMultiplied: false
+  - label: Cloud Models (limited)
+    name: cloud_models_limited
+    type: free
+    metric: requests
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included, limited usage of select cloud models
+    userMultiplied: false
+  elements:
+  - name: Pieces OS Local API
+  - name: Pieces Copilot (local models)
+  - name: Snippet Management
+  - name: Long-Term Memory
+- id: pieces-pro
+  name: Pro
+  type: subscription
+  description: >-
+    Unlocks unlimited use of premium cloud LLMs (GPT, Claude, Gemini families)
+    for the Pieces Copilot, on top of everything in Free.
+  entries:
+  - label: Pro Monthly
+    name: pro_monthly
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $18.99/month
+    userMultiplied: false
+  - label: Pro Annual
+    name: pro_annual
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: $169.99/year (~$14.17/month)
+    userMultiplied: false
+  elements:
+  - name: Premium Cloud Models
+  - name: Unlimited Cloud Copilot Usage
+- id: pieces-teams
+  name: Teams
+  type: enterprise
+  description: >-
+    Cloud sync, shared context, and collaboration features for teams.
+    Pricing provided on request.
+  entries:
+  - label: Teams Agreement
+    name: teams
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Cloud Sync
+  - name: Shared Context
+  - name: Collaboration
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

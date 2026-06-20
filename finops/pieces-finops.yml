@@ -1,0 +1,99 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Pieces
+providerId: pieces
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: true
+tags:
+- AI
+- Developer Tools
+- On-Device
+- Local API
+- Long-Term Memory
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Pieces spend. The Pieces OS local API and on-device models are
+  free and incur no per-call cost - inference cost is the local hardware's
+  compute and energy, not a billed line item. Direct monetary spend comes from
+  the optional Pro subscription (premium cloud LLMs for Copilot) and Teams
+  (cloud sync/collaboration, quote-based). Cost optimization therefore centers
+  on choosing local on-device models for routine work and reserving the paid
+  cloud subscription for cases that require premium frontier models.
+notes: >-
+  No usage-metered API billing exists for the local API; cost is subscription-
+  based (Pro per-seat) plus implicit local compute. Verify subscription pricing
+  on the Pieces paid-plans page during reconciliation.
+sources:
+- https://pieces.app/pricing
+- https://docs.pieces.app/products/paid-plans
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Pieces
+serviceCategory: AI and Machine Learning
+billingModel:
+  pricingCategory: Subscription
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Purchase
+  - Usage
+  - Adjustment
+focusColumns:
+  ServiceName: Pieces for Developers
+  ServiceCategory: AI and Machine Learning
+  ProviderName: Pieces
+  PublisherName: Pieces
+  InvoiceIssuerName: Pieces
+  BillingCurrency: USD
+  ChargeCategory: Purchase
+  PricingCategory: Subscription
+meters:
+- name: pro_seats
+  description: Pro subscription seats unlocking premium cloud LLMs for Copilot.
+  unit: seats
+  aggregation: sum
+  dimensions:
+  - account
+  - plan
+- name: teams_seats
+  description: Teams seats for cloud sync and collaboration (quote-based).
+  unit: seats
+  aggregation: sum
+  dimensions:
+  - account
+  - plan
+- name: local_inference_compute
+  description: On-device model inference - hardware compute and energy, not billed by Pieces.
+  unit: device_hours
+  aggregation: sum
+  dimensions:
+  - device
+  - model
+- name: cloud_model_requests
+  description: Copilot requests routed to cloud models under the active plan.
+  unit: requests
+  aggregation: sum
+  dimensions:
+  - account
+  - model
+principles:
+- name: Visibility
+  description: Track active Pro/Teams seats and which work routes to cloud vs. local models.
+- name: Allocation
+  description: Map Pro seats to developers/teams; tag cloud-model usage to projects.
+- name: Optimization
+  description: Default to free on-device local models for routine Copilot work; reserve paid cloud models for tasks needing frontier quality.
+- name: Accountability
+  description: Review seat counts and cloud-vs-local routing against budget; right-size the subscription tier.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
