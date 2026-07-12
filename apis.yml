@@ -175,6 +175,8 @@ apis:
     and OS-level context (device information, settings, sign-in). The control plane
     for the on-device Pieces OS process.
 common:
+- type: DomainSecurity
+  url: security/pieces-domain-security.yml
 - type: GitHubOrganization
   url: https://github.com/pieces-app
 - type: LinkedIn
@@ -189,6 +191,8 @@ common:
   url: rate-limits/pieces-rate-limits.yml
 - type: FinOps
   url: finops/pieces-finops.yml
+- type: Blog
+  url: https://pieces.app/blog
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
