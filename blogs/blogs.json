@@ -1,0 +1,14 @@
+{
+  "repo": "pieces",
+  "feeds": [
+    {
+      "source": "https://pieces.app/blog",
+      "feed_url": "https://pieces.app/blog",
+      "title": "Pieces Blog",
+      "saved": 0,
+      "error": "parse_failed"
+    }
+  ],
+  "fetched": "2026-07-11T11:43:46Z",
+  "post_count": 8
+}
