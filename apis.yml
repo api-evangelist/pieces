@@ -175,6 +175,8 @@ apis:
     and OS-level context (device information, settings, sign-in). The control plane
     for the on-device Pieces OS process.
 common:
+- type: AgenticAccess
+  url: agentic-access/pieces-agentic-access.yml
 - type: DomainSecurity
   url: security/pieces-domain-security.yml
 - type: GitHubOrganization
