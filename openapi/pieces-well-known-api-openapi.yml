@@ -1,0 +1,44 @@
+openapi: 3.0.1
+info:
+  title: Pieces OS Local Applications Well Known API
+  description: The Pieces OS local REST API. Pieces OS is an on-device process that runs on the developer's machine and serves this API over the loopback interface at http://localhost:1000. It backs the Pieces Copilot, saved snippets (assets), local and cloud model management, and workspace context, and is the source of the official OpenAPI-generated SDKs. This document captures the core documented resources (assets, formats, copilot/QGPT, conversations, models, applications, user, and well-known). For the complete machine-generated specification see the upstream pieces-os-client-openapi-spec repository.
+  termsOfService: https://pieces.app/legal/terms
+  contact:
+    name: Pieces Support
+    url: https://docs.pieces.app
+  version: '1.0'
+servers:
+- url: http://localhost:1000
+  description: Default on-device Pieces OS port (loopback only).
+- url: http://localhost:5323
+  description: Alternate on-device Pieces OS port.
+tags:
+- name: Well Known
+  description: Health and version of the local Pieces OS instance.
+paths:
+  /.well-known/health:
+    get:
+      operationId: getWellKnownHealth
+      tags:
+      - Well Known
+      summary: Health check for the local Pieces OS instance.
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+  /.well-known/version:
+    get:
+      operationId: getWellKnownVersion
+      tags:
+      - Well Known
+      summary: Returns the running Pieces OS version.
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string

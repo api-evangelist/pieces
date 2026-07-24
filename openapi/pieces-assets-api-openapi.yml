@@ -1,0 +1,180 @@
+openapi: 3.0.1
+info:
+  title: Pieces OS Local Applications Assets API
+  description: The Pieces OS local REST API. Pieces OS is an on-device process that runs on the developer's machine and serves this API over the loopback interface at http://localhost:1000. It backs the Pieces Copilot, saved snippets (assets), local and cloud model management, and workspace context, and is the source of the official OpenAPI-generated SDKs. This document captures the core documented resources (assets, formats, copilot/QGPT, conversations, models, applications, user, and well-known). For the complete machine-generated specification see the upstream pieces-os-client-openapi-spec repository.
+  termsOfService: https://pieces.app/legal/terms
+  contact:
+    name: Pieces Support
+    url: https://docs.pieces.app
+  version: '1.0'
+servers:
+- url: http://localhost:1000
+  description: Default on-device Pieces OS port (loopback only).
+- url: http://localhost:5323
+  description: Alternate on-device Pieces OS port.
+tags:
+- name: Assets
+  description: Saved snippets stored in the local Pieces OS database.
+paths:
+  /assets:
+    get:
+      operationId: getAssetsSnapshot
+      tags:
+      - Assets
+      summary: Get a snapshot of all saved assets.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Assets'
+  /assets/create:
+    post:
+      operationId: createAsset
+      tags:
+      - Assets
+      summary: Create (save) a new asset from a seed.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Seed'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Asset'
+  /assets/search:
+    post:
+      operationId: searchAssets
+      tags:
+      - Assets
+      summary: Search saved assets by query.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchedAssets'
+  /asset/{asset}:
+    get:
+      operationId: getAsset
+      tags:
+      - Assets
+      summary: Get a single asset by identifier.
+      parameters:
+      - $ref: '#/components/parameters/AssetId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Asset'
+  /asset/update:
+    post:
+      operationId: updateAsset
+      tags:
+      - Assets
+      summary: Update an existing asset.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Asset'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Asset'
+  /assets/{asset}/delete:
+    post:
+      operationId: deleteAsset
+      tags:
+      - Assets
+      summary: Delete an asset by identifier.
+      parameters:
+      - $ref: '#/components/parameters/AssetId'
+      responses:
+        '200':
+          description: OK
+components:
+  schemas:
+    Formats:
+      type: object
+      properties:
+        iterable:
+          type: array
+          items:
+            $ref: '#/components/schemas/Format'
+    SearchedAssets:
+      type: object
+      properties:
+        iterable:
+          type: array
+          items:
+            type: object
+            properties:
+              exact:
+                type: boolean
+              identifier:
+                type: string
+    Asset:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        created:
+          type: object
+        formats:
+          $ref: '#/components/schemas/Formats'
+    Assets:
+      type: object
+      properties:
+        iterable:
+          type: array
+          items:
+            $ref: '#/components/schemas/Asset'
+    Format:
+      type: object
+      properties:
+        id:
+          type: string
+        classification:
+          type: object
+        fragment:
+          type: object
+    Seed:
+      type: object
+      properties:
+        type:
+          type: string
+        asset:
+          type: object
+  parameters:
+    AssetId:
+      name: asset
+      in: path
+      required: true
+      description: The UUID of the asset.
+      schema:
+        type: string

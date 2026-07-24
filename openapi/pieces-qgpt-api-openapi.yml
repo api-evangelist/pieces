@@ -1,0 +1,156 @@
+openapi: 3.0.1
+info:
+  title: Pieces OS Local Applications QGPT API
+  description: The Pieces OS local REST API. Pieces OS is an on-device process that runs on the developer's machine and serves this API over the loopback interface at http://localhost:1000. It backs the Pieces Copilot, saved snippets (assets), local and cloud model management, and workspace context, and is the source of the official OpenAPI-generated SDKs. This document captures the core documented resources (assets, formats, copilot/QGPT, conversations, models, applications, user, and well-known). For the complete machine-generated specification see the upstream pieces-os-client-openapi-spec repository.
+  termsOfService: https://pieces.app/legal/terms
+  contact:
+    name: Pieces Support
+    url: https://docs.pieces.app
+  version: '1.0'
+servers:
+- url: http://localhost:1000
+  description: Default on-device Pieces OS port (loopback only).
+- url: http://localhost:5323
+  description: Alternate on-device Pieces OS port.
+tags:
+- name: QGPT
+  description: Pieces Copilot generative engine (question, relevance, stream).
+paths:
+  /qgpt/question:
+    post:
+      operationId: qgptQuestion
+      tags:
+      - QGPT
+      summary: Ask the Copilot a question grounded in relevant snippets.
+      description: Processes relevant code snippets or UUIDs (typically returned from /qgpt/relevance) along with a question query to produce scored answers.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QGPTQuestionInput'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QGPTQuestionOutput'
+        '401':
+          description: Invalid authentication.
+        '429':
+          description: Too many requests (rate limit or quota exceeded).
+        '500':
+          description: Internal server error.
+        '503':
+          description: Service unavailable (engine overloaded).
+  /qgpt/relevance:
+    post:
+      operationId: qgptRelevance
+      tags:
+      - QGPT
+      summary: Compute the snippets most relevant to a query.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QGPTRelevanceInput'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QGPTRelevanceOutput'
+  /qgpt/reprompt:
+    post:
+      operationId: qgptReprompt
+      tags:
+      - QGPT
+      summary: Reprompt the Copilot within an ongoing exchange.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+  /qgpt/stream:
+    get:
+      operationId: qgptStream
+      tags:
+      - QGPT
+      summary: Streamed Copilot answers over a WebSocket connection.
+      description: Provides a WebSocket connection (ws://localhost:1000/qgpt/stream) that streams inputs to the QGPT model and returns incremental answer chunks. Handles relevance and questions and manages multiple conversations. This is a WebSocket upgrade, not a plain HTTP request; the HTTP method is documented here for tooling completeness. See the AsyncAPI document for the message-oriented contract.
+      responses:
+        '101':
+          description: Switching Protocols (WebSocket upgrade).
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QGPTStreamOutput'
+components:
+  schemas:
+    QGPTQuestionOutput:
+      type: object
+      properties:
+        answers:
+          type: object
+          properties:
+            iterable:
+              type: array
+              items:
+                type: object
+                properties:
+                  text:
+                    type: string
+                  score:
+                    type: number
+    QGPTRelevanceOutput:
+      type: object
+      properties:
+        iterable:
+          type: array
+          items:
+            type: object
+            properties:
+              seed:
+                type: object
+              score:
+                type: number
+    QGPTQuestionInput:
+      type: object
+      properties:
+        query:
+          type: string
+        relevant:
+          $ref: '#/components/schemas/QGPTRelevanceOutput'
+        model:
+          type: string
+        application:
+          type: string
+    QGPTRelevanceInput:
+      type: object
+      properties:
+        query:
+          type: string
+        seeds:
+          type: object
+    QGPTStreamOutput:
+      type: object
+      properties:
+        question:
+          type: object
+        status:
+          type: string
+        conversation:
+          type: string

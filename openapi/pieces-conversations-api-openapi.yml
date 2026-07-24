@@ -1,0 +1,106 @@
+openapi: 3.0.1
+info:
+  title: Pieces OS Local Applications Conversations API
+  description: The Pieces OS local REST API. Pieces OS is an on-device process that runs on the developer's machine and serves this API over the loopback interface at http://localhost:1000. It backs the Pieces Copilot, saved snippets (assets), local and cloud model management, and workspace context, and is the source of the official OpenAPI-generated SDKs. This document captures the core documented resources (assets, formats, copilot/QGPT, conversations, models, applications, user, and well-known). For the complete machine-generated specification see the upstream pieces-os-client-openapi-spec repository.
+  termsOfService: https://pieces.app/legal/terms
+  contact:
+    name: Pieces Support
+    url: https://docs.pieces.app
+  version: '1.0'
+servers:
+- url: http://localhost:1000
+  description: Default on-device Pieces OS port (loopback only).
+- url: http://localhost:5323
+  description: Alternate on-device Pieces OS port.
+tags:
+- name: Conversations
+  description: Copilot conversations and their messages.
+paths:
+  /conversations:
+    get:
+      operationId: getConversationsSnapshot
+      tags:
+      - Conversations
+      summary: Get a snapshot of all Copilot conversations.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conversations'
+  /conversations/create:
+    post:
+      operationId: createConversation
+      tags:
+      - Conversations
+      summary: Create a new Copilot conversation.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conversation'
+  /conversation/{conversation}:
+    get:
+      operationId: getConversation
+      tags:
+      - Conversations
+      summary: Get a single conversation by identifier.
+      parameters:
+      - name: conversation
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conversation'
+  /conversation/{conversation}/messages:
+    get:
+      operationId: getConversationMessages
+      tags:
+      - Conversations
+      summary: List the messages in a conversation.
+      parameters:
+      - name: conversation
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    Conversation:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+    Conversations:
+      type: object
+      properties:
+        iterable:
+          type: array
+          items:
+            $ref: '#/components/schemas/Conversation'

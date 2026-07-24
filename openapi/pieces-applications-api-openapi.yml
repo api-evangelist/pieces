@@ -1,0 +1,88 @@
+openapi: 3.0.1
+info:
+  title: Pieces OS Local Applications API
+  description: The Pieces OS local REST API. Pieces OS is an on-device process that runs on the developer's machine and serves this API over the loopback interface at http://localhost:1000. It backs the Pieces Copilot, saved snippets (assets), local and cloud model management, and workspace context, and is the source of the official OpenAPI-generated SDKs. This document captures the core documented resources (assets, formats, copilot/QGPT, conversations, models, applications, user, and well-known). For the complete machine-generated specification see the upstream pieces-os-client-openapi-spec repository.
+  termsOfService: https://pieces.app/legal/terms
+  contact:
+    name: Pieces Support
+    url: https://docs.pieces.app
+  version: '1.0'
+servers:
+- url: http://localhost:1000
+  description: Default on-device Pieces OS port (loopback only).
+- url: http://localhost:5323
+  description: Alternate on-device Pieces OS port.
+tags:
+- name: Applications
+  description: Application registration and sessions.
+paths:
+  /applications:
+    get:
+      operationId: getApplicationsSnapshot
+      tags:
+      - Applications
+      summary: List registered applications.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Applications'
+  /applications/register:
+    post:
+      operationId: registerApplication
+      tags:
+      - Applications
+      summary: Register an application with Pieces OS.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Application'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+  /applications/session/open:
+    post:
+      operationId: openApplicationSession
+      tags:
+      - Applications
+      summary: Open an application session.
+      responses:
+        '200':
+          description: OK
+  /applications/session/close:
+    post:
+      operationId: closeApplicationSession
+      tags:
+      - Applications
+      summary: Close an application session.
+      responses:
+        '200':
+          description: OK
+components:
+  schemas:
+    Application:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        version:
+          type: string
+        platform:
+          type: string
+    Applications:
+      type: object
+      properties:
+        iterable:
+          type: array
+          items:
+            $ref: '#/components/schemas/Application'

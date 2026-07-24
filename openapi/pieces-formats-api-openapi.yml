@@ -1,0 +1,69 @@
+openapi: 3.0.1
+info:
+  title: Pieces OS Local Applications Formats API
+  description: The Pieces OS local REST API. Pieces OS is an on-device process that runs on the developer's machine and serves this API over the loopback interface at http://localhost:1000. It backs the Pieces Copilot, saved snippets (assets), local and cloud model management, and workspace context, and is the source of the official OpenAPI-generated SDKs. This document captures the core documented resources (assets, formats, copilot/QGPT, conversations, models, applications, user, and well-known). For the complete machine-generated specification see the upstream pieces-os-client-openapi-spec repository.
+  termsOfService: https://pieces.app/legal/terms
+  contact:
+    name: Pieces Support
+    url: https://docs.pieces.app
+  version: '1.0'
+servers:
+- url: http://localhost:1000
+  description: Default on-device Pieces OS port (loopback only).
+- url: http://localhost:5323
+  description: Alternate on-device Pieces OS port.
+tags:
+- name: Formats
+  description: Fragment representations that back each asset.
+paths:
+  /formats:
+    get:
+      operationId: getFormatsSnapshot
+      tags:
+      - Formats
+      summary: Get a snapshot of all formats.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Formats'
+  /format/{format}:
+    get:
+      operationId: getFormat
+      tags:
+      - Formats
+      summary: Get a single format by identifier.
+      parameters:
+      - name: format
+        in: path
+        required: true
+        description: The UUID of the format.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Format'
+components:
+  schemas:
+    Formats:
+      type: object
+      properties:
+        iterable:
+          type: array
+          items:
+            $ref: '#/components/schemas/Format'
+    Format:
+      type: object
+      properties:
+        id:
+          type: string
+        classification:
+          type: object
+        fragment:
+          type: object

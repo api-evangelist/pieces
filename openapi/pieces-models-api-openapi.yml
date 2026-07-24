@@ -1,0 +1,117 @@
+openapi: 3.0.1
+info:
+  title: Pieces OS Local Applications Models API
+  description: The Pieces OS local REST API. Pieces OS is an on-device process that runs on the developer's machine and serves this API over the loopback interface at http://localhost:1000. It backs the Pieces Copilot, saved snippets (assets), local and cloud model management, and workspace context, and is the source of the official OpenAPI-generated SDKs. This document captures the core documented resources (assets, formats, copilot/QGPT, conversations, models, applications, user, and well-known). For the complete machine-generated specification see the upstream pieces-os-client-openapi-spec repository.
+  termsOfService: https://pieces.app/legal/terms
+  contact:
+    name: Pieces Support
+    url: https://docs.pieces.app
+  version: '1.0'
+servers:
+- url: http://localhost:1000
+  description: Default on-device Pieces OS port (loopback only).
+- url: http://localhost:5323
+  description: Alternate on-device Pieces OS port.
+tags:
+- name: Models
+  description: Local and cloud LLMs available to Pieces OS.
+paths:
+  /models:
+    get:
+      operationId: getModelsSnapshot
+      tags:
+      - Models
+      summary: List the models available to Pieces OS.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Models'
+  /model/{model}:
+    get:
+      operationId: getModel
+      tags:
+      - Models
+      summary: Get a single model by identifier.
+      parameters:
+      - name: model
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model'
+  /model/{model}/download:
+    post:
+      operationId: downloadModel
+      tags:
+      - Models
+      summary: Download a local model to the device.
+      parameters:
+      - name: model
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+  /model/{model}/load:
+    post:
+      operationId: loadModel
+      tags:
+      - Models
+      summary: Load a downloaded local model into memory.
+      parameters:
+      - name: model
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+  /model/{model}/unload:
+    post:
+      operationId: unloadModel
+      tags:
+      - Models
+      summary: Unload a local model from memory.
+      parameters:
+      - name: model
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+components:
+  schemas:
+    Model:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        cloud:
+          type: boolean
+        downloaded:
+          type: boolean
+        loaded:
+          type: boolean
+    Models:
+      type: object
+      properties:
+        iterable:
+          type: array
+          items:
+            $ref: '#/components/schemas/Model'
