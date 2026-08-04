@@ -1,0 +1,28 @@
+{
+  "provider": "pieces",
+  "sources": [
+    "pieces-applications-api-openapi.yml",
+    "pieces-assets-api-openapi.yml",
+    "pieces-conversations-api-openapi.yml",
+    "pieces-formats-api-openapi.yml",
+    "pieces-models-api-openapi.yml",
+    "pieces-qgpt-api-openapi.yml",
+    "pieces-user-api-openapi.yml",
+    "pieces-well-known-api-openapi.yml"
+  ],
+  "outputs": [
+    "pieces-applications-api-openapi.yml",
+    "pieces-assets-api-openapi.yml",
+    "pieces-conversations-api-openapi.yml",
+    "pieces-formats-api-openapi.yml",
+    "pieces-models-api-openapi.yml",
+    "pieces-qgpt-api-openapi.yml",
+    "pieces-user-api-openapi.yml",
+    "pieces-well-known-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

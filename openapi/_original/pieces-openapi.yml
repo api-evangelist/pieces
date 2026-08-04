@@ -1,0 +1,680 @@
+openapi: 3.0.1
+info:
+  title: Pieces OS Local API
+  description: >-
+    The Pieces OS local REST API. Pieces OS is an on-device process that runs on
+    the developer's machine and serves this API over the loopback interface at
+    http://localhost:1000. It backs the Pieces Copilot, saved snippets (assets),
+    local and cloud model management, and workspace context, and is the source of
+    the official OpenAPI-generated SDKs. This document captures the core
+    documented resources (assets, formats, copilot/QGPT, conversations, models,
+    applications, user, and well-known). For the complete machine-generated
+    specification see the upstream pieces-os-client-openapi-spec repository.
+  termsOfService: https://pieces.app/legal/terms
+  contact:
+    name: Pieces Support
+    url: https://docs.pieces.app
+  version: '1.0'
+servers:
+  - url: http://localhost:1000
+    description: Default on-device Pieces OS port (loopback only).
+  - url: http://localhost:5323
+    description: Alternate on-device Pieces OS port.
+tags:
+  - name: Well Known
+    description: Health and version of the local Pieces OS instance.
+  - name: Assets
+    description: Saved snippets stored in the local Pieces OS database.
+  - name: Formats
+    description: Fragment representations that back each asset.
+  - name: QGPT
+    description: Pieces Copilot generative engine (question, relevance, stream).
+  - name: Conversations
+    description: Copilot conversations and their messages.
+  - name: Models
+    description: Local and cloud LLMs available to Pieces OS.
+  - name: Applications
+    description: Application registration and sessions.
+  - name: User
+    description: Local user context.
+paths:
+  /.well-known/health:
+    get:
+      operationId: getWellKnownHealth
+      tags:
+        - Well Known
+      summary: Health check for the local Pieces OS instance.
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+  /.well-known/version:
+    get:
+      operationId: getWellKnownVersion
+      tags:
+        - Well Known
+      summary: Returns the running Pieces OS version.
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+  /assets:
+    get:
+      operationId: getAssetsSnapshot
+      tags:
+        - Assets
+      summary: Get a snapshot of all saved assets.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Assets'
+  /assets/create:
+    post:
+      operationId: createAsset
+      tags:
+        - Assets
+      summary: Create (save) a new asset from a seed.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Seed'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Asset'
+  /assets/search:
+    post:
+      operationId: searchAssets
+      tags:
+        - Assets
+      summary: Search saved assets by query.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchedAssets'
+  /asset/{asset}:
+    get:
+      operationId: getAsset
+      tags:
+        - Assets
+      summary: Get a single asset by identifier.
+      parameters:
+        - $ref: '#/components/parameters/AssetId'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Asset'
+  /asset/update:
+    post:
+      operationId: updateAsset
+      tags:
+        - Assets
+      summary: Update an existing asset.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Asset'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Asset'
+  /assets/{asset}/delete:
+    post:
+      operationId: deleteAsset
+      tags:
+        - Assets
+      summary: Delete an asset by identifier.
+      parameters:
+        - $ref: '#/components/parameters/AssetId'
+      responses:
+        '200':
+          description: OK
+  /formats:
+    get:
+      operationId: getFormatsSnapshot
+      tags:
+        - Formats
+      summary: Get a snapshot of all formats.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Formats'
+  /format/{format}:
+    get:
+      operationId: getFormat
+      tags:
+        - Formats
+      summary: Get a single format by identifier.
+      parameters:
+        - name: format
+          in: path
+          required: true
+          description: The UUID of the format.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Format'
+  /qgpt/question:
+    post:
+      operationId: qgptQuestion
+      tags:
+        - QGPT
+      summary: Ask the Copilot a question grounded in relevant snippets.
+      description: >-
+        Processes relevant code snippets or UUIDs (typically returned from
+        /qgpt/relevance) along with a question query to produce scored answers.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QGPTQuestionInput'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QGPTQuestionOutput'
+        '401':
+          description: Invalid authentication.
+        '429':
+          description: Too many requests (rate limit or quota exceeded).
+        '500':
+          description: Internal server error.
+        '503':
+          description: Service unavailable (engine overloaded).
+  /qgpt/relevance:
+    post:
+      operationId: qgptRelevance
+      tags:
+        - QGPT
+      summary: Compute the snippets most relevant to a query.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QGPTRelevanceInput'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QGPTRelevanceOutput'
+  /qgpt/reprompt:
+    post:
+      operationId: qgptReprompt
+      tags:
+        - QGPT
+      summary: Reprompt the Copilot within an ongoing exchange.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+  /qgpt/stream:
+    get:
+      operationId: qgptStream
+      tags:
+        - QGPT
+      summary: Streamed Copilot answers over a WebSocket connection.
+      description: >-
+        Provides a WebSocket connection (ws://localhost:1000/qgpt/stream) that
+        streams inputs to the QGPT model and returns incremental answer chunks.
+        Handles relevance and questions and manages multiple conversations. This
+        is a WebSocket upgrade, not a plain HTTP request; the HTTP method is
+        documented here for tooling completeness. See the AsyncAPI document for
+        the message-oriented contract.
+      responses:
+        '101':
+          description: Switching Protocols (WebSocket upgrade).
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QGPTStreamOutput'
+  /conversations:
+    get:
+      operationId: getConversationsSnapshot
+      tags:
+        - Conversations
+      summary: Get a snapshot of all Copilot conversations.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conversations'
+  /conversations/create:
+    post:
+      operationId: createConversation
+      tags:
+        - Conversations
+      summary: Create a new Copilot conversation.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conversation'
+  /conversation/{conversation}:
+    get:
+      operationId: getConversation
+      tags:
+        - Conversations
+      summary: Get a single conversation by identifier.
+      parameters:
+        - name: conversation
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conversation'
+  /conversation/{conversation}/messages:
+    get:
+      operationId: getConversationMessages
+      tags:
+        - Conversations
+      summary: List the messages in a conversation.
+      parameters:
+        - name: conversation
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+  /models:
+    get:
+      operationId: getModelsSnapshot
+      tags:
+        - Models
+      summary: List the models available to Pieces OS.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Models'
+  /model/{model}:
+    get:
+      operationId: getModel
+      tags:
+        - Models
+      summary: Get a single model by identifier.
+      parameters:
+        - name: model
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model'
+  /model/{model}/download:
+    post:
+      operationId: downloadModel
+      tags:
+        - Models
+      summary: Download a local model to the device.
+      parameters:
+        - name: model
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+  /model/{model}/load:
+    post:
+      operationId: loadModel
+      tags:
+        - Models
+      summary: Load a downloaded local model into memory.
+      parameters:
+        - name: model
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+  /model/{model}/unload:
+    post:
+      operationId: unloadModel
+      tags:
+        - Models
+      summary: Unload a local model from memory.
+      parameters:
+        - name: model
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+  /applications:
+    get:
+      operationId: getApplicationsSnapshot
+      tags:
+        - Applications
+      summary: List registered applications.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Applications'
+  /applications/register:
+    post:
+      operationId: registerApplication
+      tags:
+        - Applications
+      summary: Register an application with Pieces OS.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Application'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+  /applications/session/open:
+    post:
+      operationId: openApplicationSession
+      tags:
+        - Applications
+      summary: Open an application session.
+      responses:
+        '200':
+          description: OK
+  /applications/session/close:
+    post:
+      operationId: closeApplicationSession
+      tags:
+        - Applications
+      summary: Close an application session.
+      responses:
+        '200':
+          description: OK
+  /user:
+    get:
+      operationId: getUser
+      tags:
+        - User
+      summary: Get the current local user profile.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfile'
+components:
+  parameters:
+    AssetId:
+      name: asset
+      in: path
+      required: true
+      description: The UUID of the asset.
+      schema:
+        type: string
+  schemas:
+    Asset:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        created:
+          type: object
+        formats:
+          $ref: '#/components/schemas/Formats'
+    Assets:
+      type: object
+      properties:
+        iterable:
+          type: array
+          items:
+            $ref: '#/components/schemas/Asset'
+    SearchedAssets:
+      type: object
+      properties:
+        iterable:
+          type: array
+          items:
+            type: object
+            properties:
+              exact:
+                type: boolean
+              identifier:
+                type: string
+    Seed:
+      type: object
+      properties:
+        type:
+          type: string
+        asset:
+          type: object
+    Format:
+      type: object
+      properties:
+        id:
+          type: string
+        classification:
+          type: object
+        fragment:
+          type: object
+    Formats:
+      type: object
+      properties:
+        iterable:
+          type: array
+          items:
+            $ref: '#/components/schemas/Format'
+    QGPTQuestionInput:
+      type: object
+      properties:
+        query:
+          type: string
+        relevant:
+          $ref: '#/components/schemas/QGPTRelevanceOutput'
+        model:
+          type: string
+        application:
+          type: string
+    QGPTQuestionOutput:
+      type: object
+      properties:
+        answers:
+          type: object
+          properties:
+            iterable:
+              type: array
+              items:
+                type: object
+                properties:
+                  text:
+                    type: string
+                  score:
+                    type: number
+    QGPTRelevanceInput:
+      type: object
+      properties:
+        query:
+          type: string
+        seeds:
+          type: object
+    QGPTRelevanceOutput:
+      type: object
+      properties:
+        iterable:
+          type: array
+          items:
+            type: object
+            properties:
+              seed:
+                type: object
+              score:
+                type: number
+    QGPTStreamOutput:
+      type: object
+      properties:
+        question:
+          type: object
+        status:
+          type: string
+        conversation:
+          type: string
+    Conversation:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+    Conversations:
+      type: object
+      properties:
+        iterable:
+          type: array
+          items:
+            $ref: '#/components/schemas/Conversation'
+    Model:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        cloud:
+          type: boolean
+        downloaded:
+          type: boolean
+        loaded:
+          type: boolean
+    Models:
+      type: object
+      properties:
+        iterable:
+          type: array
+          items:
+            $ref: '#/components/schemas/Model'
+    Application:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        version:
+          type: string
+        platform:
+          type: string
+    Applications:
+      type: object
+      properties:
+        iterable:
+          type: array
+          items:
+            $ref: '#/components/schemas/Application'
+    UserProfile:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        allocation:
+          type: object
