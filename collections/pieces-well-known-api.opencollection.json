@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pieces OS Local Applications Well Known API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Well Known",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Health check for the local Pieces OS instance.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:1000/.well-known/health"
+          },
+          "docs": "Health check for the local Pieces OS instance."
+        },
+        {
+          "info": {
+            "name": "Returns the running Pieces OS version.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:1000/.well-known/version"
+          },
+          "docs": "Returns the running Pieces OS version."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

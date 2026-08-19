@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pieces OS Local Applications API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Applications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List registered applications.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:1000/applications"
+          },
+          "docs": "List registered applications."
+        },
+        {
+          "info": {
+            "name": "Register an application with Pieces OS.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:1000/applications/register",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Register an application with Pieces OS."
+        },
+        {
+          "info": {
+            "name": "Open an application session.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:1000/applications/session/open"
+          },
+          "docs": "Open an application session."
+        },
+        {
+          "info": {
+            "name": "Close an application session.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:1000/applications/session/close"
+          },
+          "docs": "Close an application session."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

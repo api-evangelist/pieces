@@ -1,0 +1,101 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pieces OS Local Applications Models API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Models",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List the models available to Pieces OS.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:1000/models"
+          },
+          "docs": "List the models available to Pieces OS."
+        },
+        {
+          "info": {
+            "name": "Get a single model by identifier.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:1000/model/:model",
+            "params": [
+              {
+                "name": "model",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a single model by identifier."
+        },
+        {
+          "info": {
+            "name": "Download a local model to the device.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:1000/model/:model/download",
+            "params": [
+              {
+                "name": "model",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Download a local model to the device."
+        },
+        {
+          "info": {
+            "name": "Load a downloaded local model into memory.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:1000/model/:model/load",
+            "params": [
+              {
+                "name": "model",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Load a downloaded local model into memory."
+        },
+        {
+          "info": {
+            "name": "Unload a local model from memory.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:1000/model/:model/unload",
+            "params": [
+              {
+                "name": "model",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Unload a local model from memory."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

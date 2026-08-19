@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pieces OS Local Applications QGPT API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "QGPT",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ask the Copilot a question grounded in relevant snippets.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:1000/qgpt/question",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Processes relevant code snippets or UUIDs (typically returned from /qgpt/relevance) along with a question query to produce scored answers."
+        },
+        {
+          "info": {
+            "name": "Compute the snippets most relevant to a query.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:1000/qgpt/relevance",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Compute the snippets most relevant to a query."
+        },
+        {
+          "info": {
+            "name": "Reprompt the Copilot within an ongoing exchange.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:1000/qgpt/reprompt",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reprompt the Copilot within an ongoing exchange."
+        },
+        {
+          "info": {
+            "name": "Streamed Copilot answers over a WebSocket connection.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:1000/qgpt/stream"
+          },
+          "docs": "Provides a WebSocket connection (ws://localhost:1000/qgpt/stream) that streams inputs to the QGPT model and returns incremental answer chunks. Handles relevance and questions and manages multiple conversations. This is a WebSocket upgrade, not a plain HTTP request; the HTTP method is documented here for tooling completeness. See the AsyncAPI document for the message-oriented contract."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

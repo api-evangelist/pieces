@@ -1,0 +1,184 @@
+{
+  "item": [
+    {
+      "id": "1d44339d-abf9-4a77-a91d-117a61e7a2f3",
+      "name": "Formats",
+      "description": {
+        "content": "Fragment representations that back each asset.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d80a5a2f-d11d-472c-aadb-292750284976",
+          "name": "Get a snapshot of all formats.",
+          "request": {
+            "name": "Get a snapshot of all formats.",
+            "description": {},
+            "url": {
+              "path": [
+                "formats"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f618360a-2660-4a3a-8c65-899118ac7af9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "formats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"iterable\": [\n    {\n      \"id\": \"string\",\n      \"classification\": {},\n      \"fragment\": {}\n    },\n    {\n      \"id\": \"string\",\n      \"classification\": {},\n      \"fragment\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "18bc0901-7d76-46e3-b55d-1cdde0f765ca",
+          "name": "Get a single format by identifier.",
+          "request": {
+            "name": "Get a single format by identifier.",
+            "description": {},
+            "url": {
+              "path": [
+                "format",
+                ":format"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "format",
+                  "description": "(Required) The UUID of the format."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "81628c5d-e531-4070-9e2e-e12fc91cf1d3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "format",
+                    ":format"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "format",
+                      "description": "(Required) The UUID of the format."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"classification\": {},\n  \"fragment\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:1000",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5a0b9ba2-2984-469e-beef-0f4d2375d991",
+    "name": "Pieces OS Local Applications Formats API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Pieces OS local REST API. Pieces OS is an on-device process that runs on the developer's machine and serves this API over the loopback interface at http://localhost:1000. It backs the Pieces Copilot, saved snippets (assets), local and cloud model management, and workspace context, and is the source of the official OpenAPI-generated SDKs. This document captures the core documented resources (assets, formats, copilot/QGPT, conversations, models, applications, user, and well-known). For the complete machine-generated specification see the upstream pieces-os-client-openapi-spec repository.\n\nContact Support:\n Name: Pieces Support",
+      "type": "text/plain"
+    }
+  }
+}

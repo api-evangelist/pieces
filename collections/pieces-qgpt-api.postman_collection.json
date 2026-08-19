@@ -1,0 +1,559 @@
+{
+  "item": [
+    {
+      "id": "bf33f0ea-4a07-4c87-a30c-f424208b9a0c",
+      "name": "QGPT",
+      "description": {
+        "content": "Pieces Copilot generative engine (question, relevance, stream).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d4c94d28-bcf7-4efb-b9a8-2253515195cf",
+          "name": "Ask the Copilot a question grounded in relevant snippets.",
+          "request": {
+            "name": "Ask the Copilot a question grounded in relevant snippets.",
+            "description": {
+              "content": "Processes relevant code snippets or UUIDs (typically returned from /qgpt/relevance) along with a question query to produce scored answers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "qgpt",
+                "question"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"relevant\": {\n    \"iterable\": [\n      {\n        \"seed\": \"<object>\",\n        \"score\": \"<number>\"\n      },\n      {\n        \"seed\": \"<object>\",\n        \"score\": \"<number>\"\n      }\n    ]\n  },\n  \"model\": \"<string>\",\n  \"application\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d0fb4539-8359-4c2a-8ff9-5b13621e653d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "qgpt",
+                    "question"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"relevant\": {\n    \"iterable\": [\n      {\n        \"seed\": \"<object>\",\n        \"score\": \"<number>\"\n      },\n      {\n        \"seed\": \"<object>\",\n        \"score\": \"<number>\"\n      }\n    ]\n  },\n  \"model\": \"<string>\",\n  \"application\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"answers\": {\n    \"iterable\": [\n      {\n        \"text\": \"string\",\n        \"score\": 2098.044986158163\n      },\n      {\n        \"text\": \"string\",\n        \"score\": 1666.37295167553\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82f18b9c-9741-4fe2-9d98-a1d04f88fdd6",
+              "name": "Invalid authentication.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "qgpt",
+                    "question"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"relevant\": {\n    \"iterable\": [\n      {\n        \"seed\": \"<object>\",\n        \"score\": \"<number>\"\n      },\n      {\n        \"seed\": \"<object>\",\n        \"score\": \"<number>\"\n      }\n    ]\n  },\n  \"model\": \"<string>\",\n  \"application\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8224ec0c-64c4-4a18-bc1b-7acb3e6723bf",
+              "name": "Too many requests (rate limit or quota exceeded).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "qgpt",
+                    "question"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"relevant\": {\n    \"iterable\": [\n      {\n        \"seed\": \"<object>\",\n        \"score\": \"<number>\"\n      },\n      {\n        \"seed\": \"<object>\",\n        \"score\": \"<number>\"\n      }\n    ]\n  },\n  \"model\": \"<string>\",\n  \"application\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6cdfc110-50c5-4cff-9120-c2162278b94d",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "qgpt",
+                    "question"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"relevant\": {\n    \"iterable\": [\n      {\n        \"seed\": \"<object>\",\n        \"score\": \"<number>\"\n      },\n      {\n        \"seed\": \"<object>\",\n        \"score\": \"<number>\"\n      }\n    ]\n  },\n  \"model\": \"<string>\",\n  \"application\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "789b3962-71ee-4162-a4ab-335088d7d87d",
+              "name": "Service unavailable (engine overloaded).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "qgpt",
+                    "question"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"relevant\": {\n    \"iterable\": [\n      {\n        \"seed\": \"<object>\",\n        \"score\": \"<number>\"\n      },\n      {\n        \"seed\": \"<object>\",\n        \"score\": \"<number>\"\n      }\n    ]\n  },\n  \"model\": \"<string>\",\n  \"application\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "09d580f3-9695-4f3a-96ad-c3cf090b1b79",
+          "name": "Compute the snippets most relevant to a query.",
+          "request": {
+            "name": "Compute the snippets most relevant to a query.",
+            "description": {},
+            "url": {
+              "path": [
+                "qgpt",
+                "relevance"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"seeds\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d75c0720-0c48-4456-9064-641f87305b77",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "qgpt",
+                    "relevance"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\",\n  \"seeds\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"iterable\": [\n    {\n      \"seed\": \"<object>\",\n      \"score\": \"<number>\"\n    },\n    {\n      \"seed\": \"<object>\",\n      \"score\": \"<number>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c2debcb0-40bd-4a1c-8a57-83341504ba79",
+          "name": "Reprompt the Copilot within an ongoing exchange.",
+          "request": {
+            "name": "Reprompt the Copilot within an ongoing exchange.",
+            "description": {},
+            "url": {
+              "path": [
+                "qgpt",
+                "reprompt"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "633e18f5-115e-4592-a5ec-3dadec48c7df",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "qgpt",
+                    "reprompt"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "219743dc-8757-4f9d-a115-3cdecc54d6ed",
+          "name": "Streamed Copilot answers over a WebSocket connection.",
+          "request": {
+            "name": "Streamed Copilot answers over a WebSocket connection.",
+            "description": {
+              "content": "Provides a WebSocket connection (ws://localhost:1000/qgpt/stream) that streams inputs to the QGPT model and returns incremental answer chunks. Handles relevance and questions and manages multiple conversations. This is a WebSocket upgrade, not a plain HTTP request; the HTTP method is documented here for tooling completeness. See the AsyncAPI document for the message-oriented contract.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "qgpt",
+                "stream"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e478285b-4bb1-451c-af95-8a4ebb7587e5",
+              "name": "Switching Protocols (WebSocket upgrade).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "qgpt",
+                    "stream"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Switching Protocols",
+              "code": 101,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b542101a-f5bd-4246-a06e-a164918f51f1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "qgpt",
+                    "stream"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"question\": {},\n  \"status\": \"string\",\n  \"conversation\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:1000",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e0694f9d-65d7-4f58-897e-db62c96b1b9a",
+    "name": "Pieces OS Local Applications QGPT API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Pieces OS local REST API. Pieces OS is an on-device process that runs on the developer's machine and serves this API over the loopback interface at http://localhost:1000. It backs the Pieces Copilot, saved snippets (assets), local and cloud model management, and workspace context, and is the source of the official OpenAPI-generated SDKs. This document captures the core documented resources (assets, formats, copilot/QGPT, conversations, models, applications, user, and well-known). For the complete machine-generated specification see the upstream pieces-os-client-openapi-spec repository.\n\nContact Support:\n Name: Pieces Support",
+      "type": "text/plain"
+    }
+  }
+}

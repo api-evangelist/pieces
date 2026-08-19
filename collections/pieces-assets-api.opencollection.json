@@ -1,0 +1,112 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pieces OS Local Applications Assets API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Assets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a snapshot of all saved assets.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:1000/assets"
+          },
+          "docs": "Get a snapshot of all saved assets."
+        },
+        {
+          "info": {
+            "name": "Create (save) a new asset from a seed.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:1000/assets/create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create (save) a new asset from a seed."
+        },
+        {
+          "info": {
+            "name": "Search saved assets by query.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:1000/assets/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search saved assets by query."
+        },
+        {
+          "info": {
+            "name": "Get a single asset by identifier.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:1000/asset/:asset",
+            "params": [
+              {
+                "name": "asset",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the asset."
+              }
+            ]
+          },
+          "docs": "Get a single asset by identifier."
+        },
+        {
+          "info": {
+            "name": "Update an existing asset.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:1000/asset/update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing asset."
+        },
+        {
+          "info": {
+            "name": "Delete an asset by identifier.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:1000/assets/:asset/delete",
+            "params": [
+              {
+                "name": "asset",
+                "value": "",
+                "type": "path",
+                "description": "The UUID of the asset."
+              }
+            ]
+          },
+          "docs": "Delete an asset by identifier."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

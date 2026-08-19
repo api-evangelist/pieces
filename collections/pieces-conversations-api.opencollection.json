@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Pieces OS Local Applications Conversations API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Conversations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a snapshot of all Copilot conversations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:1000/conversations"
+          },
+          "docs": "Get a snapshot of all Copilot conversations."
+        },
+        {
+          "info": {
+            "name": "Create a new Copilot conversation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "http://localhost:1000/conversations/create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new Copilot conversation."
+        },
+        {
+          "info": {
+            "name": "Get a single conversation by identifier.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:1000/conversation/:conversation",
+            "params": [
+              {
+                "name": "conversation",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a single conversation by identifier."
+        },
+        {
+          "info": {
+            "name": "List the messages in a conversation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "http://localhost:1000/conversation/:conversation/messages",
+            "params": [
+              {
+                "name": "conversation",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List the messages in a conversation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

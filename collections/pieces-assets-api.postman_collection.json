@@ -1,0 +1,529 @@
+{
+  "item": [
+    {
+      "id": "a9b71be3-8a5d-4b29-b151-062233257e40",
+      "name": "Assets",
+      "description": {
+        "content": "Saved snippets stored in the local Pieces OS database.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b6f03df5-aaee-4733-8ed0-a07a7837ecc6",
+          "name": "Get a snapshot of all saved assets.",
+          "request": {
+            "name": "Get a snapshot of all saved assets.",
+            "description": {},
+            "url": {
+              "path": [
+                "assets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "121aa996-a277-4327-968d-500c38530aa2",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "assets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"iterable\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"created\": {},\n      \"formats\": {\n        \"iterable\": [\n          {\n            \"id\": \"string\",\n            \"classification\": {},\n            \"fragment\": {}\n          },\n          {\n            \"id\": \"string\",\n            \"classification\": {},\n            \"fragment\": {}\n          }\n        ]\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"created\": {},\n      \"formats\": {\n        \"iterable\": [\n          {\n            \"id\": \"string\",\n            \"classification\": {},\n            \"fragment\": {}\n          },\n          {\n            \"id\": \"string\",\n            \"classification\": {},\n            \"fragment\": {}\n          }\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "993dbb7f-14c7-4ff7-8c2d-f2478c6c490b",
+          "name": "Create (save) a new asset from a seed.",
+          "request": {
+            "name": "Create (save) a new asset from a seed.",
+            "description": {},
+            "url": {
+              "path": [
+                "assets",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\",\n  \"asset\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3cf1ce54-9b9e-4a0d-babb-6c6b0fbb35cc",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "assets",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"asset\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"created\": {},\n  \"formats\": {\n    \"iterable\": [\n      {\n        \"id\": \"string\",\n        \"classification\": {},\n        \"fragment\": {}\n      },\n      {\n        \"id\": \"string\",\n        \"classification\": {},\n        \"fragment\": {}\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "88a54824-53c2-4618-8936-c51a97a65b0a",
+          "name": "Search saved assets by query.",
+          "request": {
+            "name": "Search saved assets by query.",
+            "description": {},
+            "url": {
+              "path": [
+                "assets",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "09f33361-fc14-4c56-874e-6e6f43232c46",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "assets",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"iterable\": [\n    {\n      \"exact\": false,\n      \"identifier\": \"string\"\n    },\n    {\n      \"exact\": false,\n      \"identifier\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1e7e5f2c-957c-48c6-bb35-0f6f8430b190",
+          "name": "Get a single asset by identifier.",
+          "request": {
+            "name": "Get a single asset by identifier.",
+            "description": {},
+            "url": {
+              "path": [
+                "asset",
+                ":asset"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "asset",
+                  "description": "(Required) The UUID of the asset."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a120eb07-e7d2-4cf2-9499-9bd67c50d8f9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "asset",
+                    ":asset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) The UUID of the asset."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"created\": {},\n  \"formats\": {\n    \"iterable\": [\n      {\n        \"id\": \"string\",\n        \"classification\": {},\n        \"fragment\": {}\n      },\n      {\n        \"id\": \"string\",\n        \"classification\": {},\n        \"fragment\": {}\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3fb5099b-b6a2-4c75-b1e1-b5fd2354fb69",
+          "name": "Update an existing asset.",
+          "request": {
+            "name": "Update an existing asset.",
+            "description": {},
+            "url": {
+              "path": [
+                "asset",
+                "update"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"created\": \"<object>\",\n  \"formats\": {\n    \"iterable\": [\n      {\n        \"id\": \"<string>\",\n        \"classification\": \"<object>\",\n        \"fragment\": \"<object>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"classification\": \"<object>\",\n        \"fragment\": \"<object>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e95b0bcc-c245-4b4c-93e3-739c63295200",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "asset",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"created\": \"<object>\",\n  \"formats\": {\n    \"iterable\": [\n      {\n        \"id\": \"<string>\",\n        \"classification\": \"<object>\",\n        \"fragment\": \"<object>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"classification\": \"<object>\",\n        \"fragment\": \"<object>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"created\": \"<object>\",\n  \"formats\": {\n    \"iterable\": [\n      {\n        \"id\": \"<string>\",\n        \"classification\": \"<object>\",\n        \"fragment\": \"<object>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"classification\": \"<object>\",\n        \"fragment\": \"<object>\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "37b1786d-7db1-4686-a949-a8bf8c65432a",
+          "name": "Delete an asset by identifier.",
+          "request": {
+            "name": "Delete an asset by identifier.",
+            "description": {},
+            "url": {
+              "path": [
+                "assets",
+                ":asset",
+                "delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "asset",
+                  "description": "(Required) The UUID of the asset."
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "600643b5-5b66-4bc6-82bb-35eadee724cf",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "assets",
+                    ":asset",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "asset",
+                      "description": "(Required) The UUID of the asset."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "http://localhost:1000",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "bec75c41-719c-4c3b-91eb-4aa669068f0e",
+    "name": "Pieces OS Local Applications Assets API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Pieces OS local REST API. Pieces OS is an on-device process that runs on the developer's machine and serves this API over the loopback interface at http://localhost:1000. It backs the Pieces Copilot, saved snippets (assets), local and cloud model management, and workspace context, and is the source of the official OpenAPI-generated SDKs. This document captures the core documented resources (assets, formats, copilot/QGPT, conversations, models, applications, user, and well-known). For the complete machine-generated specification see the upstream pieces-os-client-openapi-spec repository.\n\nContact Support:\n Name: Pieces Support",
+      "type": "text/plain"
+    }
+  }
+}
