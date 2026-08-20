@@ -22,6 +22,12 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/pieces.png
 tags:
+- Artificial Intelligence
+- Developer Tools
+- On-Device
+- Local API
+- Long-Term Memory
+tags_raw:
 - AI
 - Developer Tools
 - On-Device
@@ -37,6 +43,8 @@ apis:
   humanURL: https://docs.pieces.app/products/core-dependencies/pieces-os
   baseURL: http://localhost:1000
   tags:
+  - Application
+  tags_raw:
   - Applications
   properties:
   - type: OpenAPI
@@ -191,6 +199,8 @@ apis:
   humanURL: https://docs.pieces.app/products/core-dependencies/pieces-os
   baseURL: http://localhost:1000
   tags:
+  - .well Known
+  tags_raw:
   - Well Known
   properties:
   - type: OpenAPI
