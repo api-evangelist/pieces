@@ -8,6 +8,18 @@ description: Pieces is an on-device AI developer assistant and long-term memory 
   Copilot (QGPT) question/stream endpoints, local and cloud models, formats,
   applications, conversations, and workspace context. The same on-device API powers
   official OpenAPI-generated SDKs for Python, TypeScript, Dart, Kotlin, and C#.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: unknown
