@@ -211,7 +211,7 @@ apis:
   humanURL: https://docs.pieces.app/products/core-dependencies/pieces-os
   baseURL: http://localhost:1000
   tags:
-  - Well Known
+  - .well Known
   tags_raw:
   - Well Known
   properties:
