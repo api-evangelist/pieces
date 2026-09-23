@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Pieces OS Local Applications Assets API
-  description: The Pieces OS local REST API. Pieces OS is an on-device process that runs on the developer's machine and serves this API over the loopback interface at http://localhost:1000. It backs the Pieces Copilot, saved snippets (assets), local and cloud model management, and workspace context, and is the source of the official OpenAPI-generated SDKs. This document captures the core documented resources (assets, formats, copilot/QGPT, conversations, models, applications, user, and well-known). For the complete machine-generated specification see the upstream pieces-os-client-openapi-spec repository.
+  title: Pieces OS Local Assets API
+  description: The Pieces OS local REST API.
   termsOfService: https://pieces.app/legal/terms
   contact:
     name: Pieces Support
@@ -21,7 +21,7 @@ paths:
       operationId: getAssetsSnapshot
       tags:
       - Assets
-      summary: Get a snapshot of all saved assets.
+      summary: Get a snapshot of all saved assets
       responses:
         '200':
           description: OK
@@ -34,7 +34,7 @@ paths:
       operationId: createAsset
       tags:
       - Assets
-      summary: Create (save) a new asset from a seed.
+      summary: Create (save) a new asset from a seed
       requestBody:
         required: true
         content:
@@ -53,7 +53,7 @@ paths:
       operationId: searchAssets
       tags:
       - Assets
-      summary: Search saved assets by query.
+      summary: Search saved assets by query
       requestBody:
         required: true
         content:
@@ -75,7 +75,7 @@ paths:
       operationId: getAsset
       tags:
       - Assets
-      summary: Get a single asset by identifier.
+      summary: Get a single asset by identifier
       parameters:
       - $ref: '#/components/parameters/AssetId'
       responses:
@@ -90,7 +90,7 @@ paths:
       operationId: updateAsset
       tags:
       - Assets
-      summary: Update an existing asset.
+      summary: Update an existing asset
       requestBody:
         required: true
         content:
@@ -109,7 +109,7 @@ paths:
       operationId: deleteAsset
       tags:
       - Assets
-      summary: Delete an asset by identifier.
+      summary: Delete an asset by identifier
       parameters:
       - $ref: '#/components/parameters/AssetId'
       responses:
@@ -117,13 +117,31 @@ paths:
           description: OK
 components:
   schemas:
-    Formats:
+    Asset:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        created:
+          type: object
+        formats:
+          $ref: '#/components/schemas/Formats'
+    Seed:
+      type: object
+      properties:
+        type:
+          type: string
+        asset:
+          type: object
+    Assets:
       type: object
       properties:
         iterable:
           type: array
           items:
-            $ref: '#/components/schemas/Format'
+            $ref: '#/components/schemas/Asset'
     SearchedAssets:
       type: object
       properties:
@@ -136,24 +154,6 @@ components:
                 type: boolean
               identifier:
                 type: string
-    Asset:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        created:
-          type: object
-        formats:
-          $ref: '#/components/schemas/Formats'
-    Assets:
-      type: object
-      properties:
-        iterable:
-          type: array
-          items:
-            $ref: '#/components/schemas/Asset'
     Format:
       type: object
       properties:
@@ -163,13 +163,13 @@ components:
           type: object
         fragment:
           type: object
-    Seed:
+    Formats:
       type: object
       properties:
-        type:
-          type: string
-        asset:
-          type: object
+        iterable:
+          type: array
+          items:
+            $ref: '#/components/schemas/Format'
   parameters:
     AssetId:
       name: asset

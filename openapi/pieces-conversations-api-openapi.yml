@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Pieces OS Local Applications Conversations API
-  description: The Pieces OS local REST API. Pieces OS is an on-device process that runs on the developer's machine and serves this API over the loopback interface at http://localhost:1000. It backs the Pieces Copilot, saved snippets (assets), local and cloud model management, and workspace context, and is the source of the official OpenAPI-generated SDKs. This document captures the core documented resources (assets, formats, copilot/QGPT, conversations, models, applications, user, and well-known). For the complete machine-generated specification see the upstream pieces-os-client-openapi-spec repository.
+  title: Pieces OS Local Conversations API
+  description: The Pieces OS local REST API.
   termsOfService: https://pieces.app/legal/terms
   contact:
     name: Pieces Support
@@ -21,7 +21,7 @@ paths:
       operationId: getConversationsSnapshot
       tags:
       - Conversations
-      summary: Get a snapshot of all Copilot conversations.
+      summary: Get a snapshot of all Copilot conversations
       responses:
         '200':
           description: OK
@@ -34,7 +34,7 @@ paths:
       operationId: createConversation
       tags:
       - Conversations
-      summary: Create a new Copilot conversation.
+      summary: Create a new Copilot conversation
       requestBody:
         required: true
         content:
@@ -53,7 +53,7 @@ paths:
       operationId: getConversation
       tags:
       - Conversations
-      summary: Get a single conversation by identifier.
+      summary: Get a single conversation by identifier
       parameters:
       - name: conversation
         in: path
@@ -72,7 +72,7 @@ paths:
       operationId: getConversationMessages
       tags:
       - Conversations
-      summary: List the messages in a conversation.
+      summary: List the messages in a conversation
       parameters:
       - name: conversation
         in: path
