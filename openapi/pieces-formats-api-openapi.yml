@@ -51,13 +51,6 @@ paths:
                 $ref: '#/components/schemas/Format'
 components:
   schemas:
-    Formats:
-      type: object
-      properties:
-        iterable:
-          type: array
-          items:
-            $ref: '#/components/schemas/Format'
     Format:
       type: object
       properties:
@@ -67,3 +60,10 @@ components:
           type: object
         fragment:
           type: object
+    Formats:
+      type: object
+      properties:
+        iterable:
+          type: array
+          items:
+            $ref: '#/components/schemas/Format'

@@ -117,31 +117,13 @@ paths:
           description: OK
 components:
   schemas:
-    Asset:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        created:
-          type: object
-        formats:
-          $ref: '#/components/schemas/Formats'
-    Seed:
-      type: object
-      properties:
-        type:
-          type: string
-        asset:
-          type: object
-    Assets:
+    Formats:
       type: object
       properties:
         iterable:
           type: array
           items:
-            $ref: '#/components/schemas/Asset'
+            $ref: '#/components/schemas/Format'
     SearchedAssets:
       type: object
       properties:
@@ -154,6 +136,13 @@ components:
                 type: boolean
               identifier:
                 type: string
+    Assets:
+      type: object
+      properties:
+        iterable:
+          type: array
+          items:
+            $ref: '#/components/schemas/Asset'
     Format:
       type: object
       properties:
@@ -163,13 +152,24 @@ components:
           type: object
         fragment:
           type: object
-    Formats:
+    Seed:
       type: object
       properties:
-        iterable:
-          type: array
-          items:
-            $ref: '#/components/schemas/Format'
+        type:
+          type: string
+        asset:
+          type: object
+    Asset:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        created:
+          type: object
+        formats:
+          $ref: '#/components/schemas/Formats'
   parameters:
     AssetId:
       name: asset
