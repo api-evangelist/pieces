@@ -88,13 +88,6 @@ paths:
                 type: object
 components:
   schemas:
-    Conversations:
-      type: object
-      properties:
-        iterable:
-          type: array
-          items:
-            $ref: '#/components/schemas/Conversation'
     Conversation:
       type: object
       properties:
@@ -104,3 +97,10 @@ components:
           type: string
         type:
           type: string
+    Conversations:
+      type: object
+      properties:
+        iterable:
+          type: array
+          items:
+            $ref: '#/components/schemas/Conversation'

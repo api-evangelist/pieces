@@ -116,14 +116,42 @@ paths:
         '200':
           description: OK
 components:
+  parameters:
+    AssetId:
+      name: asset
+      in: path
+      required: true
+      description: The UUID of the asset.
+      schema:
+        type: string
   schemas:
-    Formats:
+    Asset:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        created:
+          type: object
+        formats:
+          $ref: '#/components/schemas/Formats'
+    Format:
+      type: object
+      properties:
+        id:
+          type: string
+        classification:
+          type: object
+        fragment:
+          type: object
+    Assets:
       type: object
       properties:
         iterable:
           type: array
           items:
-            $ref: '#/components/schemas/Format'
+            $ref: '#/components/schemas/Asset'
     SearchedAssets:
       type: object
       properties:
@@ -136,22 +164,6 @@ components:
                 type: boolean
               identifier:
                 type: string
-    Assets:
-      type: object
-      properties:
-        iterable:
-          type: array
-          items:
-            $ref: '#/components/schemas/Asset'
-    Format:
-      type: object
-      properties:
-        id:
-          type: string
-        classification:
-          type: object
-        fragment:
-          type: object
     Seed:
       type: object
       properties:
@@ -159,22 +171,10 @@ components:
           type: string
         asset:
           type: object
-    Asset:
+    Formats:
       type: object
       properties:
-        id:
-          type: string
-        name:
-          type: string
-        created:
-          type: object
-        formats:
-          $ref: '#/components/schemas/Formats'
-  parameters:
-    AssetId:
-      name: asset
-      in: path
-      required: true
-      description: The UUID of the asset.
-      schema:
-        type: string
+        iterable:
+          type: array
+          items:
+            $ref: '#/components/schemas/Format'

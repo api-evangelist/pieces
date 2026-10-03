@@ -100,17 +100,6 @@ paths:
                 $ref: '#/components/schemas/QGPTStreamOutput'
 components:
   schemas:
-    QGPTQuestionInput:
-      type: object
-      properties:
-        query:
-          type: string
-        relevant:
-          $ref: '#/components/schemas/QGPTRelevanceOutput'
-        model:
-          type: string
-        application:
-          type: string
     QGPTRelevanceOutput:
       type: object
       properties:
@@ -132,6 +121,24 @@ components:
           type: string
         conversation:
           type: string
+    QGPTRelevanceInput:
+      type: object
+      properties:
+        query:
+          type: string
+        seeds:
+          type: object
+    QGPTQuestionInput:
+      type: object
+      properties:
+        query:
+          type: string
+        relevant:
+          $ref: '#/components/schemas/QGPTRelevanceOutput'
+        model:
+          type: string
+        application:
+          type: string
     QGPTQuestionOutput:
       type: object
       properties:
@@ -147,10 +154,3 @@ components:
                     type: string
                   score:
                     type: number
-    QGPTRelevanceInput:
-      type: object
-      properties:
-        query:
-          type: string
-        seeds:
-          type: object
