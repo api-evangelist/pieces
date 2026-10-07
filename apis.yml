@@ -232,6 +232,8 @@ apis:
   - type: AsyncAPI
     url: asyncapi/pieces-asyncapi.yml
 common:
+- type: Pricing
+  url: https://pieces.app/pricing
 - url: https://pieces.app/blog/rss.xml
   type: BlogRSS
 - type: AgenticAccess
