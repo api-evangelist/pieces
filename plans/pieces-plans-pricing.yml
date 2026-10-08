@@ -37,3 +37,27 @@ plans:
   unit: per user / month · billed monthly
   included_quota: Everything in Pro, org-wide capture and feature controls, approved AI providers and
     your own API keys. Also available at $69.99 per user / quarter.
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - seat
+  units:
+  - seat
+  plans:
+  - name: Pro
+    access: other
+    model: seat
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - month
+  - name: Enterprise
+    access: other
+    model: seat
+    model_how: derived
+    units:
+    - seat
+    periods:
+    - month
