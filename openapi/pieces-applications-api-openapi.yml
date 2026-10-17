@@ -68,13 +68,6 @@ paths:
           description: OK
 components:
   schemas:
-    Applications:
-      type: object
-      properties:
-        iterable:
-          type: array
-          items:
-            $ref: '#/components/schemas/Application'
     Application:
       type: object
       properties:
@@ -86,3 +79,10 @@ components:
           type: string
         platform:
           type: string
+    Applications:
+      type: object
+      properties:
+        iterable:
+          type: array
+          items:
+            $ref: '#/components/schemas/Application'
