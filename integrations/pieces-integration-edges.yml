@@ -33,6 +33,40 @@ edges:
   apps:
   - 'Pieces for Developers: Copilot & Code Capture'
   - Pieces
+- partner_name: Raycast (raycast-store)
+  partner: raycast
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: raycast-store
+  evidence: https://www.raycast.com/pieces/pieces-raycast
+  mirror_of: raycast/integrations/raycast-integration-edges.yml
+  apps:
+  - Pieces for Raycast
+  listing_count: 1
+  detected: '2026-10-22'
+  detected_by: mirror-platform-listings.py
+  category: Raycast Store extension (first-party)
+- partner_name: Obsidian (obsidian-community-plugins)
+  partner: obsidian
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: obsidian-community-plugins
+  evidence: https://github.com/pieces-app/obsidian-pieces
+  mirror_of: obsidian/integrations/obsidian-integration-edges.yml
+  apps:
+  - Pieces for Developers
+  listing_count: 1
+  detected: '2026-10-22'
+  detected_by: mirror-platform-listings.py
+  category: Obsidian community plugin
 generated: '2026-10-21'
 method: searched
 source:
@@ -43,3 +77,5 @@ checked:
 - https://addons.mozilla.org/api/v5/addons/addon/<slug>/
 - https://addons.mozilla.org/api/v5/addons/search/?type=extension&app=firefox
 - https://chromewebstore.google.com/sitemap
+- raycast/integrations/raycast-integration-edges.yml
+- obsidian/integrations/obsidian-integration-edges.yml
