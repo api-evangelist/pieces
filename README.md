@@ -1,4 +1,4 @@
-# Pieces (pieces)
+# Pieces
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,167 +66,148 @@
 
 Pieces is an on-device AI developer assistant and long-term memory tool. Pieces OS runs locally on the developer's machine and exposes a documented local REST API at http://localhost:1000 covering saved snippets (assets), the Pieces Copilot (QGPT) question/stream endpoints, local and cloud models, formats, applications, conversations, and workspace context. The same on-device API powers official OpenAPI-generated SDKs for Python, TypeScript, Dart, Kotlin, and C#.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/pieces/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/pieces/refs/heads/main/apis.yml)
+**Areas:** Artificial Intelligence · Developer Tools · On-Device · Local API · Long-Term Memory · Real-Time
 
-## Tags
+## Pieces on APIs.io
 
-- AI
-- Developer Tools
-- On-Device
-- Local API
-- Long-Term Memory
+Everything profiled for Pieces is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/pieces/](https://apis.io/providers/pieces/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (8)
 
-- **Created:** 2026-06-20
-- **Modified:** 2026-06-20
+- [Pieces Applications API](https://apis.io/apis/pieces/pieces-applications-api/) — Application registration and sessions.
+- [Pieces Assets API](https://apis.io/apis/pieces/pieces-assets-api/) — Saved snippets stored in the local Pieces OS database.
+- [Pieces Conversations API](https://apis.io/apis/pieces/pieces-conversations-api/) — Copilot conversations and their messages.
+- [Pieces Formats API](https://apis.io/apis/pieces/pieces-formats-api/) — Fragment representations that back each asset.
+- [Pieces Models API](https://apis.io/apis/pieces/pieces-models-api/) — Local and cloud LLMs available to Pieces OS.
+- [Pieces QGPT API](https://apis.io/apis/pieces/pieces-qgpt-api/) — Pieces Copilot generative engine (question, relevance, stream).
+- [Pieces User API](https://apis.io/apis/pieces/pieces-user-api/) — Local user context.
+- [Pieces Well Known API](https://apis.io/apis/pieces/pieces-well-known-api/) — Health and version of the local Pieces OS instance.
 
-## APIs
+### Published properties
 
-### Pieces Assets API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Create, read, update, delete, search, and stream saved snippets (assets) held in the local Pieces OS database. Served on-device over the localhost REST transport - no data leaves the machine unless the user opts into cloud sync.
+#### AsyncAPI (1)
 
-- **Human URL:** [https://docs.pieces.app/products/core-dependencies/pieces-os](https://docs.pieces.app/products/core-dependencies/pieces-os)
-- **Base URL:** `http://localhost:1000`
+Event-driven and webhook contracts.
 
-#### Tags
+- [Pieces Copilot (QGPT) Streaming (On-Device WebSocket)](https://apis.io/asyncapis/pieces/pieces-asyncapi/)
 
-- Assets
-- Snippets
-- On-Device
+#### Event channels (1)
 
-#### Properties
+Individual events and webhooks the provider emits.
 
-- [Documentation](https://docs.pieces.app/products/core-dependencies/pieces-os)
-- [API Reference](https://github.com/pieces-app/pieces-os-client-openapi-spec)
-- [OpenAPI](openapi/pieces-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/pieces.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/pieces.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [GitHub](https://github.com/pieces-app)
+- [/qgpt/stream](https://apis.io/channels/pieces/qgpt-stream/)
 
-### Pieces Copilot (QGPT) API
+#### Agentic access (1)
 
-The Pieces Copilot generative engine (QGPT). Ask questions grounded in relevant local snippets via POST /qgpt/question, score relevance, reprompt, and open a WebSocket at /qgpt/stream for streamed, multi-turn conversational answers. Runs against local or cloud LLMs from the on-device Pieces OS process.
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- **Human URL:** [https://docs.pieces.app/products/core-dependencies/pieces-os](https://docs.pieces.app/products/core-dependencies/pieces-os)
-- **Base URL:** `http://localhost:1000`
+- [Pieces Agentic Access](https://apis.io/agentic-access/pieces/pieces-agentic-access/)
 
-#### Tags
+#### Collections (9)
 
-- Copilot
-- QGPT
-- Conversations
+Postman and Open Collection request collections.
 
-#### Properties
+- [Pieces OS Local API](https://apis.io/collections/pieces/open-pieces/)
+- [Pieces OS Local Applications API](https://apis.io/collections/pieces/open-pieces-applications-api/)
+- [Pieces OS Local Applications Assets API](https://apis.io/collections/pieces/open-pieces-assets-api/)
+- [Pieces OS Local Applications Conversations API](https://apis.io/collections/pieces/open-pieces-conversations-api/)
+- [Pieces OS Local Applications Formats API](https://apis.io/collections/pieces/open-pieces-formats-api/)
+- [Pieces OS Local Applications Models API](https://apis.io/collections/pieces/open-pieces-models-api/)
+- [Pieces OS Local Applications QGPT API](https://apis.io/collections/pieces/open-pieces-qgpt-api/)
+- [Pieces OS Local Applications User API](https://apis.io/collections/pieces/open-pieces-user-api/)
+- [Pieces OS Local Applications Well Known API](https://apis.io/collections/pieces/open-pieces-well-known-api/)
 
-- [Documentation](https://docs.pieces.app/products/core-dependencies/pieces-os)
-- [API Reference](https://github.com/pieces-app/pieces-os-client-openapi-spec)
-- [OpenAPI](openapi/pieces-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [AsyncAPI](asyncapi/pieces-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [Postman Collection](collections/pieces.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/pieces.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [GitHub](https://github.com/pieces-app)
+#### Governance rules (1)
 
-### Pieces Conversations API
+Spectral rulesets for the provider's contracts.
 
-Manage Copilot conversations and their messages locally - create, list, rename, search, summarize, and delete conversations, and create/update/search the messages within them. Stored in the on-device Pieces OS database.
+- [Pieces — asyncapi rules](https://apis.io/rules/pieces/pieces-asyncapi-spectral-rules/)
 
-- **Human URL:** [https://docs.pieces.app/products/core-dependencies/pieces-os](https://docs.pieces.app/products/core-dependencies/pieces-os)
-- **Base URL:** `http://localhost:1000`
+#### Security (1)
 
-#### Tags
+Authentication, trust centre, and vulnerability disclosure.
 
-- Conversations
-- Messages
-- Copilot
+- [Pieces Domain Security](https://apis.io/security/pieces/pieces-domain-security/)
 
-#### Properties
+#### Plans and pricing (1)
 
-- [Documentation](https://docs.pieces.app/products/core-dependencies/pieces-os)
-- [API Reference](https://github.com/pieces-app/pieces-os-client-openapi-spec)
-- [OpenAPI](openapi/pieces-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/pieces.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/pieces.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [GitHub](https://github.com/pieces-app)
+Published plans, tiers and prices.
 
-### Pieces Models API
+- [Pieces Plans Pricing](https://apis.io/plans/pieces/pieces-plans-pricing/)
 
-Enumerate and manage the LLMs available to Pieces OS - list models, download/load/unload local models (e.g. Llama, Mistral via on-device runtime), track download progress, and delete model caches. Local models run fully on-device; cloud models are routed through the same local API surface.
+#### Rate limits (1)
 
-- **Human URL:** [https://docs.pieces.app/products/core-dependencies/pieces-os](https://docs.pieces.app/products/core-dependencies/pieces-os)
-- **Base URL:** `http://localhost:1000`
+Published request limits.
 
-#### Tags
+- [Pieces Rate Limits](https://apis.io/rate-limits/pieces/pieces-rate-limits/)
 
-- Models
-- LLM
-- On-Device
+#### FinOps (1)
 
-#### Properties
+What the API costs to run, by operation.
 
-- [Documentation](https://docs.pieces.app/products/core-dependencies/pieces-os)
-- [API Reference](https://github.com/pieces-app/pieces-os-client-openapi-spec)
-- [OpenAPI](openapi/pieces-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/pieces.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/pieces.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [GitHub](https://github.com/pieces-app)
+- [Pieces Finops](https://apis.io/finops/pieces/pieces-finops/)
 
-### Pieces Formats API
+## Where to find this API
 
-Read, update, reclassify, and analyze the underlying formats (code or text fragment representations) that back each asset. Served on-device by Pieces OS over the localhost transport.
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- **Human URL:** [https://docs.pieces.app/products/core-dependencies/pieces-os](https://docs.pieces.app/products/core-dependencies/pieces-os)
-- **Base URL:** `http://localhost:1000`
-
-#### Tags
-
-- Formats
-- Classification
-- Fragments
-
-#### Properties
-
-- [Documentation](https://docs.pieces.app/products/core-dependencies/pieces-os)
-- [API Reference](https://github.com/pieces-app/pieces-os-client-openapi-spec)
-- [OpenAPI](openapi/pieces-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/pieces.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/pieces.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [GitHub](https://github.com/pieces-app)
-
-### Pieces Applications & Workspace API
-
-Register applications, open/close application sessions, read the well-known health and version of the local Pieces OS instance, and manage user and OS-level context (device information, settings, sign-in). The control plane for the on-device Pieces OS process.
-
-- **Human URL:** [https://docs.pieces.app/products/core-dependencies/pieces-os](https://docs.pieces.app/products/core-dependencies/pieces-os)
-- **Base URL:** `http://localhost:1000`
-
-#### Tags
-
-- Applications
-- Workspace
-- OS
-
-#### Properties
-
-- [Documentation](https://docs.pieces.app/products/core-dependencies/pieces-os)
-- [API Reference](https://github.com/pieces-app/pieces-os-client-openapi-spec)
-- [OpenAPI](openapi/pieces-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/pieces.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/pieces.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [GitHub](https://github.com/pieces-app)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/pieces-app)
-- [LinkedIn](https://www.linkedin.com/company/getpieces)
 - [Website](https://pieces.app)
 - [Documentation](https://docs.pieces.app)
-- [Plans](plans/pieces-plans-pricing.yml)
-- [Rate Limits](rate-limits/pieces-rate-limits.yml)
-- [Fin Ops](finops/pieces-finops.yml)
+- [Pricing](https://pieces.app/pricing)
+- [Blog](https://pieces.app/blog)
+- [GitHub](https://github.com/pieces-app)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 26.8** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 57.1 |
+| Contract quality | 40.5 |
+| Contract governance | 11.4 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 20.2 |
+| Access clarity | 31.6 |
+
+**Agent readiness 16.5** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 5.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/pieces/](https://apis.io/providers/pieces/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Pieces: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/pieces/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
